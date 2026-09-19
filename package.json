@@ -1,0 +1,14 @@
+{
+  "name": "bioprint",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "start": "node server/http.js",
+    "test": "node --test test/*.test.js"
+  },
+  "description": "Behavioral verification: ambient pre-login evidence, passive-first login, active step-up and post-login activity monitoring."
+}
