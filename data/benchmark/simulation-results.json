@@ -1,0 +1,559 @@
+{
+  "synthetic": true,
+  "note": "Synthetic personas driving the real engine. Pipeline behaviour evidence only; see cmu-results.json for real-data evidence.",
+  "config": {
+    "users": 30,
+    "noise": 1,
+    "enrolled": 30,
+    "enrollmentFailures": [],
+    "loginsPerUser": 20,
+    "seed": 7,
+    "passiveRounds": 10,
+    "activeRounds": 8,
+    "matcherVersion": "passive-4",
+    "password": "13 characters",
+    "db": "/Users/hg/Downloads/bioprint/data/benchmark/simulation.sqlite"
+  },
+  "summary": {
+    "genuine": {
+      "attempts": 600,
+      "accept": 0.9317,
+      "stepUp": 0.0683,
+      "reject": 0,
+      "reasons": {
+        "PASSIVE_IDENTITY_UNCERTAIN": 41
+      },
+      "identityScore": {
+        "median": 0.5801,
+        "p10": 0.4531,
+        "p90": 0.7025
+      },
+      "latencyMs": {
+        "median": 2.6899,
+        "p95": 3.4333,
+        "engineMedian": 2.63,
+        "engineP95": 3.358
+      }
+    },
+    "zeroEffort": {
+      "attempts": 1740,
+      "accept": 0.0287,
+      "stepUp": 0.5207,
+      "reject": 0.4506,
+      "reasons": {
+        "IDENTITY_MISMATCH": 784,
+        "PASSIVE_IDENTITY_UNCERTAIN": 906
+      },
+      "identityScore": {
+        "median": 0.1745,
+        "p10": 0.0809,
+        "p90": 0.335
+      },
+      "latencyMs": {
+        "median": 3.1024,
+        "p95": 4.1155,
+        "engineMedian": 3.043,
+        "engineP95": 4.052
+      }
+    },
+    "mimic": {
+      "attempts": 360,
+      "accept": 0.5028,
+      "stepUp": 0.4778,
+      "reject": 0.0194,
+      "reasons": {
+        "PASSIVE_IDENTITY_UNCERTAIN": 172,
+        "IDENTITY_MISMATCH": 7
+      },
+      "identityScore": {
+        "median": 0.4262,
+        "p10": 0.2787,
+        "p90": 0.5539
+      },
+      "latencyMs": {
+        "median": 3.7644,
+        "p95": 5.1073,
+        "engineMedian": 3.7,
+        "engineP95": 5.017
+      }
+    },
+    "bot:naive": {
+      "attempts": 90,
+      "accept": 0,
+      "stepUp": 0,
+      "reject": 1,
+      "reasons": {
+        "AUTOMATION_RISK": 90
+      },
+      "identityScore": {
+        "median": 0.0113,
+        "p10": 0.0083,
+        "p90": 0.1304
+      },
+      "latencyMs": {
+        "median": 3.6838,
+        "p95": 4.5572,
+        "engineMedian": 3.612,
+        "engineP95": 4.496
+      }
+    },
+    "bot:forgedTrust": {
+      "attempts": 90,
+      "accept": 0,
+      "stepUp": 0,
+      "reject": 1,
+      "reasons": {
+        "AUTOMATION_RISK": 90
+      },
+      "identityScore": {
+        "median": 0.0089,
+        "p10": 0.0069,
+        "p90": 0.0216
+      },
+      "latencyMs": {
+        "median": 3.6903,
+        "p95": 4.7271,
+        "engineMedian": 3.63,
+        "engineP95": 4.626
+      }
+    },
+    "bot:jittered": {
+      "attempts": 90,
+      "accept": 0,
+      "stepUp": 0.1778,
+      "reject": 0.8222,
+      "reasons": {
+        "PASSIVE_IDENTITY_UNCERTAIN": 16,
+        "IDENTITY_MISMATCH": 74
+      },
+      "identityScore": {
+        "median": 0.119,
+        "p10": 0.0594,
+        "p90": 0.1724
+      },
+      "latencyMs": {
+        "median": 3.7165,
+        "p95": 4.6552,
+        "engineMedian": 3.662,
+        "engineP95": 4.593
+      }
+    },
+    "replay:exact": {
+      "attempts": 30,
+      "accept": 0,
+      "stepUp": 0,
+      "reject": 1,
+      "reasons": {
+        "EXACT_REPLAY": 30
+      },
+      "identityScore": {
+        "median": 0.5874,
+        "p10": 0.4173,
+        "p90": 0.702
+      },
+      "latencyMs": {
+        "median": 4.0152,
+        "p95": 4.9457,
+        "engineMedian": 3.954,
+        "engineP95": 4.883
+      }
+    },
+    "replay:timeScaled": {
+      "attempts": 30,
+      "accept": 0,
+      "stepUp": 0,
+      "reject": 1,
+      "reasons": {
+        "NEAR_REPLAY": 30
+      },
+      "identityScore": {
+        "median": 0.5519,
+        "p10": 0.42,
+        "p90": 0.6799
+      },
+      "latencyMs": {
+        "median": 3.933,
+        "p95": 4.677,
+        "engineMedian": 3.875,
+        "engineP95": 4.555
+      }
+    }
+  },
+  "perUser": [
+    {
+      "user": "demo_user00",
+      "threshold": 0.4,
+      "rawCalibration": 0.3502,
+      "passiveAttempts": 10,
+      "genuineAccept": 1,
+      "zeroEffortAccept": 0,
+      "eer": 0
+    },
+    {
+      "user": "demo_user01",
+      "threshold": 0.5507,
+      "rawCalibration": 0.4928,
+      "passiveAttempts": 10,
+      "genuineAccept": 0.85,
+      "zeroEffortAccept": 0.0172,
+      "eer": 0.0086
+    },
+    {
+      "user": "demo_user02",
+      "threshold": 0.4,
+      "rawCalibration": 0.4325,
+      "passiveAttempts": 10,
+      "genuineAccept": 0.95,
+      "zeroEffortAccept": 0,
+      "eer": 0
+    },
+    {
+      "user": "demo_user03",
+      "threshold": 0.4,
+      "rawCalibration": 0.4113,
+      "passiveAttempts": 10,
+      "genuineAccept": 0.65,
+      "zeroEffortAccept": 0,
+      "eer": 0.0086
+    },
+    {
+      "user": "demo_user04",
+      "threshold": 0.4,
+      "rawCalibration": 0.5113,
+      "passiveAttempts": 10,
+      "genuineAccept": 0.95,
+      "zeroEffortAccept": 0.0172,
+      "eer": 0.0086
+    },
+    {
+      "user": "demo_user05",
+      "threshold": 0.4,
+      "rawCalibration": 0.2035,
+      "passiveAttempts": 10,
+      "genuineAccept": 1,
+      "zeroEffortAccept": 0.069,
+      "eer": 0.0086
+    },
+    {
+      "user": "demo_user06",
+      "threshold": 0.4,
+      "rawCalibration": 0.283,
+      "passiveAttempts": 10,
+      "genuineAccept": 0.85,
+      "zeroEffortAccept": 0,
+      "eer": 0
+    },
+    {
+      "user": "demo_user07",
+      "threshold": 0.4,
+      "rawCalibration": 0.4148,
+      "passiveAttempts": 10,
+      "genuineAccept": 0.95,
+      "zeroEffortAccept": 0.069,
+      "eer": 0.0595
+    },
+    {
+      "user": "demo_user08",
+      "threshold": 0.4487,
+      "rawCalibration": 0.3536,
+      "passiveAttempts": 10,
+      "genuineAccept": 0.85,
+      "zeroEffortAccept": 0.0172,
+      "eer": 0.0086
+    },
+    {
+      "user": "demo_user09",
+      "threshold": 0.4448,
+      "rawCalibration": 0.4434,
+      "passiveAttempts": 10,
+      "genuineAccept": 1,
+      "zeroEffortAccept": 0.0517,
+      "eer": 0.0422
+    },
+    {
+      "user": "demo_user10",
+      "threshold": 0.4,
+      "rawCalibration": 0.4129,
+      "passiveAttempts": 10,
+      "genuineAccept": 1,
+      "zeroEffortAccept": 0,
+      "eer": 0
+    },
+    {
+      "user": "demo_user11",
+      "threshold": 0.4,
+      "rawCalibration": 0.3353,
+      "passiveAttempts": 10,
+      "genuineAccept": 1,
+      "zeroEffortAccept": 0,
+      "eer": 0
+    },
+    {
+      "user": "demo_user12",
+      "threshold": 0.4904,
+      "rawCalibration": 0.4123,
+      "passiveAttempts": 10,
+      "genuineAccept": 0.95,
+      "zeroEffortAccept": 0,
+      "eer": 0.0086
+    },
+    {
+      "user": "demo_user13",
+      "threshold": 0.4399,
+      "rawCalibration": 0.4057,
+      "passiveAttempts": 10,
+      "genuineAccept": 0.7,
+      "zeroEffortAccept": 0.0345,
+      "eer": 0.0595
+    },
+    {
+      "user": "demo_user14",
+      "threshold": 0.5038,
+      "rawCalibration": 0.4916,
+      "passiveAttempts": 10,
+      "genuineAccept": 0.9,
+      "zeroEffortAccept": 0,
+      "eer": 0
+    },
+    {
+      "user": "demo_user15",
+      "threshold": 0.454,
+      "rawCalibration": 0.3807,
+      "passiveAttempts": 10,
+      "genuineAccept": 0.95,
+      "zeroEffortAccept": 0,
+      "eer": 0
+    },
+    {
+      "user": "demo_user16",
+      "threshold": 0.4299,
+      "rawCalibration": 0.4036,
+      "passiveAttempts": 10,
+      "genuineAccept": 1,
+      "zeroEffortAccept": 0.069,
+      "eer": 0.0509
+    },
+    {
+      "user": "demo_user17",
+      "threshold": 0.4063,
+      "rawCalibration": 0.3436,
+      "passiveAttempts": 10,
+      "genuineAccept": 1,
+      "zeroEffortAccept": 0,
+      "eer": 0
+    },
+    {
+      "user": "demo_user18",
+      "threshold": 0.4415,
+      "rawCalibration": 0.4152,
+      "passiveAttempts": 10,
+      "genuineAccept": 0.8,
+      "zeroEffortAccept": 0.0345,
+      "eer": 0.0931
+    },
+    {
+      "user": "demo_user19",
+      "threshold": 0.4,
+      "rawCalibration": 0.4009,
+      "passiveAttempts": 10,
+      "genuineAccept": 1,
+      "zeroEffortAccept": 0,
+      "eer": 0
+    },
+    {
+      "user": "demo_user20",
+      "threshold": 0.4,
+      "rawCalibration": 0.2742,
+      "passiveAttempts": 10,
+      "genuineAccept": 1,
+      "zeroEffortAccept": 0.1552,
+      "eer": 0.0509
+    },
+    {
+      "user": "demo_user21",
+      "threshold": 0.4,
+      "rawCalibration": 0.3712,
+      "passiveAttempts": 10,
+      "genuineAccept": 0.95,
+      "zeroEffortAccept": 0.069,
+      "eer": 0.0509
+    },
+    {
+      "user": "demo_user22",
+      "threshold": 0.5207,
+      "rawCalibration": 0.5147,
+      "passiveAttempts": 10,
+      "genuineAccept": 1,
+      "zeroEffortAccept": 0,
+      "eer": 0
+    },
+    {
+      "user": "demo_user23",
+      "threshold": 0.4,
+      "rawCalibration": 0.2951,
+      "passiveAttempts": 10,
+      "genuineAccept": 1,
+      "zeroEffortAccept": 0.1552,
+      "eer": 0.0931
+    },
+    {
+      "user": "demo_user24",
+      "threshold": 0.4987,
+      "rawCalibration": 0.5449,
+      "passiveAttempts": 10,
+      "genuineAccept": 0.95,
+      "zeroEffortAccept": 0,
+      "eer": 0.0086
+    },
+    {
+      "user": "demo_user25",
+      "threshold": 0.4819,
+      "rawCalibration": 0.389,
+      "passiveAttempts": 10,
+      "genuineAccept": 0.9,
+      "zeroEffortAccept": 0,
+      "eer": 0
+    },
+    {
+      "user": "demo_user26",
+      "threshold": 0.4394,
+      "rawCalibration": 0.3428,
+      "passiveAttempts": 10,
+      "genuineAccept": 0.85,
+      "zeroEffortAccept": 0,
+      "eer": 0
+    },
+    {
+      "user": "demo_user27",
+      "threshold": 0.4,
+      "rawCalibration": 0.474,
+      "passiveAttempts": 10,
+      "genuineAccept": 0.95,
+      "zeroEffortAccept": 0.0345,
+      "eer": 0.0422
+    },
+    {
+      "user": "demo_user28",
+      "threshold": 0.4,
+      "rawCalibration": 0.3216,
+      "passiveAttempts": 10,
+      "genuineAccept": 1,
+      "zeroEffortAccept": 0.0345,
+      "eer": 0
+    },
+    {
+      "user": "demo_user29",
+      "threshold": 0.4,
+      "rawCalibration": 0.3459,
+      "passiveAttempts": 10,
+      "genuineAccept": 1,
+      "zeroEffortAccept": 0.0345,
+      "eer": 0
+    }
+  ],
+  "modality": {
+    "username": {
+      "genuineMedian": 0.4867,
+      "zeroEffortMedian": 0.1245,
+      "mimicMedian": 0.3069,
+      "eerZeroEffort": 0.1266,
+      "eerMimic": 0.2886
+    },
+    "password": {
+      "genuineMedian": 0.4438,
+      "zeroEffortMedian": 0.1206,
+      "mimicMedian": 0.3048,
+      "eerZeroEffort": 0.135,
+      "eerMimic": 0.325
+    },
+    "pointer": {
+      "genuineMedian": 0.73,
+      "zeroEffortMedian": 0.3585,
+      "mimicMedian": 0.5825,
+      "eerZeroEffort": 0.2667,
+      "eerMimic": 0.3803
+    },
+    "click": {
+      "genuineMedian": 0.8419,
+      "zeroEffortMedian": 0.5401,
+      "mimicMedian": 0.7446,
+      "eerZeroEffort": 0.2232,
+      "eerMimic": 0.3531
+    },
+    "crossModal": {
+      "genuineMedian": 0.9502,
+      "zeroEffortMedian": 0.4236,
+      "mimicMedian": 0.8927,
+      "eerZeroEffort": 0.165,
+      "eerMimic": 0.3531
+    }
+  },
+  "identityEER": {
+    "pooledGenuineVsZeroEffort": {
+      "eer": 0.03841954022988503,
+      "threshold": 0.3940944500134369,
+      "far": 0.03850574712643673,
+      "frr": 0.03833333333333333
+    },
+    "pooledGenuineVsMimic": {
+      "eer": 0.24472222222222223,
+      "threshold": 0.5087874151999575,
+      "far": 0.24444444444444446,
+      "frr": 0.245
+    },
+    "meanPerUserZeroEffort": 0.0201
+  },
+  "thresholdSweep": [
+    {
+      "threshold": 0.5,
+      "genuineFRR": 0.215,
+      "zeroEffortFAR": 0.0046,
+      "mimicFAR": 0.2611
+    },
+    {
+      "threshold": 0.6,
+      "genuineFRR": 0.585,
+      "zeroEffortFAR": 0,
+      "mimicFAR": 0.0444
+    },
+    {
+      "threshold": 0.7,
+      "genuineFRR": 0.89,
+      "zeroEffortFAR": 0,
+      "mimicFAR": 0
+    },
+    {
+      "threshold": 0.75,
+      "genuineFRR": 0.9683,
+      "zeroEffortFAR": 0,
+      "mimicFAR": 0
+    },
+    {
+      "threshold": 0.8,
+      "genuineFRR": 0.9933,
+      "zeroEffortFAR": 0,
+      "mimicFAR": 0
+    },
+    {
+      "threshold": 0.85,
+      "genuineFRR": 0.9983,
+      "zeroEffortFAR": 0,
+      "mimicFAR": 0
+    },
+    {
+      "threshold": 0.9,
+      "genuineFRR": 1,
+      "zeroEffortFAR": 0,
+      "mimicFAR": 0
+    }
+  ],
+  "latencyMs": {
+    "allPassiveAuth": {
+      "median": 3.152,
+      "p95": 4.4539,
+      "max": 11.8716
+    },
+    "enrollmentRounds": null
+  },
+  "runtimeMs": 17185
+}

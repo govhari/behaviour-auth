@@ -1,0 +1,5071 @@
+{
+  "dataset": {
+    "name": "CMU DSL-StrongPasswordData",
+    "source": "https://www.cs.cmu.edu/~keystroke/DSL-StrongPasswordData.csv",
+    "subjects": 51,
+    "repetitions": 20400,
+    "password": ".tie5Roanl"
+  },
+  "citation": "K. S. Killourhy and R. A. Maxion, \"Comparing Anomaly-Detection Algorithms for Keystroke Dynamics\", DSN 2009. Reported mean EERs: scaled Manhattan 0.096, nearest-neighbor (Mahalanobis) 0.100, outlier-count (z-score) 0.102.",
+  "protocol": {
+    "train": "first 200 repetitions of the subject (sessions 1-4)",
+    "genuineTest": "remaining 200 repetitions (sessions 5-8)",
+    "impostorTest": "first 5 repetitions of each of the other 50 subjects (250 attempts)",
+    "thresholdSweep": "per-subject, over all observed scores; EER = (FAR+FRR)/2 at the closest crossing",
+    "subsampling": "none, all 20,400 repetitions used"
+  },
+  "engine": {
+    "matcherVersion": "passive-4",
+    "passiveRounds": 10,
+    "howScored": "analyzePassive on a keydown/keyup stream with a keyboard submit and no pointer events; matchPassive against calibratePassive(model); with a single available modality the fused score equals that modality score",
+    "automationSignalsTripped": {}
+  },
+  "bioprint": {
+    "passwordField": {
+      "description": "keys hidden (position + action only): median dwell, down-down, up-down, overlap ratio, pause ratio, burst length, pause median/spread, correction and modifier ratios",
+      "enroll200": {
+        "meanEER": 0.082,
+        "sdEER": 0.0675,
+        "medianEER": 0.0645,
+        "minEER": 0.0045,
+        "maxEER": 0.2845,
+        "pooledEER": 0.0929,
+        "pooledEERThreshold": 0.3602,
+        "meanEERThreshold": 0.3639,
+        "production": {
+          "rule": "max(0.85, min(0.97, median(LOO) - 3*MAD(LOO)))",
+          "meanCalibratedRaw": 0.3136,
+          "meanThreshold": 0.4118,
+          "usersAtFloor": 0,
+          "meanFAR": 0.0659,
+          "meanFRR": 0.1338
+        },
+        "floorSweep": [
+          {
+            "floor": 0.5,
+            "meanFAR": 0.0283,
+            "meanFRR": 0.2627
+          },
+          {
+            "floor": 0.6,
+            "meanFAR": 0.0089,
+            "meanFRR": 0.4296
+          },
+          {
+            "floor": 0.7,
+            "meanFAR": 0.0018,
+            "meanFRR": 0.6316
+          },
+          {
+            "floor": 0.75,
+            "meanFAR": 0.0005,
+            "meanFRR": 0.7389
+          },
+          {
+            "floor": 0.8,
+            "meanFAR": 0.0001,
+            "meanFRR": 0.841
+          },
+          {
+            "floor": 0.85,
+            "meanFAR": 0,
+            "meanFRR": 0.9295
+          },
+          {
+            "floor": 0.9,
+            "meanFAR": 0,
+            "meanFRR": 0.9857
+          }
+        ],
+        "fixedThreshold": [
+          {
+            "threshold": 0.5,
+            "meanFAR": 0.0289,
+            "meanFRR": 0.2602
+          },
+          {
+            "threshold": 0.6,
+            "meanFAR": 0.009,
+            "meanFRR": 0.4292
+          },
+          {
+            "threshold": 0.7,
+            "meanFAR": 0.0018,
+            "meanFRR": 0.6316
+          },
+          {
+            "threshold": 0.75,
+            "meanFAR": 0.0005,
+            "meanFRR": 0.7389
+          },
+          {
+            "threshold": 0.8,
+            "meanFAR": 0.0001,
+            "meanFRR": 0.841
+          },
+          {
+            "threshold": 0.85,
+            "meanFAR": 0,
+            "meanFRR": 0.9295
+          },
+          {
+            "threshold": 0.9,
+            "meanFAR": 0,
+            "meanFRR": 0.9857
+          },
+          {
+            "threshold": 0.95,
+            "meanFAR": 0,
+            "meanFRR": 0.9995
+          }
+        ],
+        "looPercentileRule": {
+          "rule": "10th percentile of leave-one-out enrollment scores, no floor",
+          "meanThreshold": 0.3528,
+          "meanFAR": 0.1169,
+          "meanFRR": 0.0819
+        },
+        "whatIf": {
+          "arithmeticMeanFusion": {
+            "meanEER": 0.0861,
+            "meanEERThreshold": 0.6414
+          },
+          "outlierCount196": {
+            "meanEER": 0.0856,
+            "meanEERThreshold": 0.8401
+          }
+        },
+        "perUser": [
+          {
+            "subject": "s002",
+            "eer": 0.2555,
+            "eerThreshold": 0.3126,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.156,
+            "productionFRR": 0.31
+          },
+          {
+            "subject": "s003",
+            "eer": 0.12,
+            "eerThreshold": 0.1725,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.008,
+            "productionFRR": 0.515
+          },
+          {
+            "subject": "s004",
+            "eer": 0.091,
+            "eerThreshold": 0.3738,
+            "calibratedThreshold": 0.4041,
+            "productionFAR": 0.076,
+            "productionFRR": 0.13
+          },
+          {
+            "subject": "s005",
+            "eer": 0.031,
+            "eerThreshold": 0.3199,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.008,
+            "productionFRR": 0.1
+          },
+          {
+            "subject": "s007",
+            "eer": 0.08,
+            "eerThreshold": 0.3502,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.04,
+            "productionFRR": 0.16
+          },
+          {
+            "subject": "s008",
+            "eer": 0.031,
+            "eerThreshold": 0.3796,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.028,
+            "productionFRR": 0.045
+          },
+          {
+            "subject": "s010",
+            "eer": 0.0155,
+            "eerThreshold": 0.4017,
+            "calibratedThreshold": 0.4198,
+            "productionFAR": 0.012,
+            "productionFRR": 0.03
+          },
+          {
+            "subject": "s011",
+            "eer": 0.0355,
+            "eerThreshold": 0.3052,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.008,
+            "productionFRR": 0.125
+          },
+          {
+            "subject": "s012",
+            "eer": 0.011,
+            "eerThreshold": 0.2409,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.008,
+            "productionFRR": 0.085
+          },
+          {
+            "subject": "s013",
+            "eer": 0.0245,
+            "eerThreshold": 0.3617,
+            "calibratedThreshold": 0.4083,
+            "productionFAR": 0.024,
+            "productionFRR": 0.05
+          },
+          {
+            "subject": "s015",
+            "eer": 0.0845,
+            "eerThreshold": 0.3953,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.084,
+            "productionFRR": 0.09
+          },
+          {
+            "subject": "s016",
+            "eer": 0.191,
+            "eerThreshold": 0.3561,
+            "calibratedThreshold": 0.428,
+            "productionFAR": 0.084,
+            "productionFRR": 0.415
+          },
+          {
+            "subject": "s017",
+            "eer": 0.029,
+            "eerThreshold": 0.4591,
+            "calibratedThreshold": 0.5495,
+            "productionFAR": 0.012,
+            "productionFRR": 0.06
+          },
+          {
+            "subject": "s018",
+            "eer": 0.06,
+            "eerThreshold": 0.2873,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.02,
+            "productionFRR": 0.15
+          },
+          {
+            "subject": "s019",
+            "eer": 0.0245,
+            "eerThreshold": 0.3407,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.008,
+            "productionFRR": 0.065
+          },
+          {
+            "subject": "s020",
+            "eer": 0.1,
+            "eerThreshold": 0.2575,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.008,
+            "productionFRR": 0.21
+          },
+          {
+            "subject": "s021",
+            "eer": 0.08,
+            "eerThreshold": 0.362,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.048,
+            "productionFRR": 0.11
+          },
+          {
+            "subject": "s022",
+            "eer": 0.02,
+            "eerThreshold": 0.3257,
+            "calibratedThreshold": 0.4013,
+            "productionFAR": 0.004,
+            "productionFRR": 0.065
+          },
+          {
+            "subject": "s024",
+            "eer": 0.0555,
+            "eerThreshold": 0.4121,
+            "calibratedThreshold": 0.4067,
+            "productionFAR": 0.06,
+            "productionFRR": 0.055
+          },
+          {
+            "subject": "s025",
+            "eer": 0.089,
+            "eerThreshold": 0.4982,
+            "calibratedThreshold": 0.4184,
+            "productionFAR": 0.136,
+            "productionFRR": 0.065
+          },
+          {
+            "subject": "s026",
+            "eer": 0.08,
+            "eerThreshold": 0.3758,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.068,
+            "productionFRR": 0.085
+          },
+          {
+            "subject": "s027",
+            "eer": 0.049,
+            "eerThreshold": 0.3925,
+            "calibratedThreshold": 0.4164,
+            "productionFAR": 0.036,
+            "productionFRR": 0.065
+          },
+          {
+            "subject": "s028",
+            "eer": 0.04,
+            "eerThreshold": 0.4156,
+            "calibratedThreshold": 0.4187,
+            "productionFAR": 0.04,
+            "productionFRR": 0.045
+          },
+          {
+            "subject": "s029",
+            "eer": 0.0645,
+            "eerThreshold": 0.3326,
+            "calibratedThreshold": 0.4488,
+            "productionFAR": 0.016,
+            "productionFRR": 0.125
+          },
+          {
+            "subject": "s030",
+            "eer": 0.129,
+            "eerThreshold": 0.4147,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.14,
+            "productionFRR": 0.1
+          },
+          {
+            "subject": "s031",
+            "eer": 0.269,
+            "eerThreshold": 0.4535,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.34,
+            "productionFRR": 0.16
+          },
+          {
+            "subject": "s032",
+            "eer": 0.2355,
+            "eerThreshold": 0.2417,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.1,
+            "productionFRR": 0.565
+          },
+          {
+            "subject": "s033",
+            "eer": 0.111,
+            "eerThreshold": 0.3264,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.056,
+            "productionFRR": 0.22
+          },
+          {
+            "subject": "s034",
+            "eer": 0.091,
+            "eerThreshold": 0.3451,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.044,
+            "productionFRR": 0.195
+          },
+          {
+            "subject": "s035",
+            "eer": 0.16,
+            "eerThreshold": 0.2894,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.076,
+            "productionFRR": 0.305
+          },
+          {
+            "subject": "s036",
+            "eer": 0.0155,
+            "eerThreshold": 0.4117,
+            "calibratedThreshold": 0.576,
+            "productionFAR": 0,
+            "productionFRR": 0.04
+          },
+          {
+            "subject": "s037",
+            "eer": 0.0755,
+            "eerThreshold": 0.3337,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.036,
+            "productionFRR": 0.175
+          },
+          {
+            "subject": "s038",
+            "eer": 0.091,
+            "eerThreshold": 0.4809,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.192,
+            "productionFRR": 0.055
+          },
+          {
+            "subject": "s039",
+            "eer": 0.049,
+            "eerThreshold": 0.345,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.024,
+            "productionFRR": 0.07
+          },
+          {
+            "subject": "s040",
+            "eer": 0.151,
+            "eerThreshold": 0.3629,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.128,
+            "productionFRR": 0.22
+          },
+          {
+            "subject": "s041",
+            "eer": 0.0845,
+            "eerThreshold": 0.2823,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.008,
+            "productionFRR": 0.22
+          },
+          {
+            "subject": "s042",
+            "eer": 0.029,
+            "eerThreshold": 0.4769,
+            "calibratedThreshold": 0.4502,
+            "productionFAR": 0.04,
+            "productionFRR": 0.025
+          },
+          {
+            "subject": "s043",
+            "eer": 0.029,
+            "eerThreshold": 0.3779,
+            "calibratedThreshold": 0.4236,
+            "productionFAR": 0.02,
+            "productionFRR": 0.04
+          },
+          {
+            "subject": "s044",
+            "eer": 0.091,
+            "eerThreshold": 0.4408,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.136,
+            "productionFRR": 0.065
+          },
+          {
+            "subject": "s046",
+            "eer": 0.1245,
+            "eerThreshold": 0.475,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.268,
+            "productionFRR": 0.05
+          },
+          {
+            "subject": "s047",
+            "eer": 0.2845,
+            "eerThreshold": 0.4432,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.332,
+            "productionFRR": 0.21
+          },
+          {
+            "subject": "s048",
+            "eer": 0.049,
+            "eerThreshold": 0.4223,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.06,
+            "productionFRR": 0.04
+          },
+          {
+            "subject": "s049",
+            "eer": 0.04,
+            "eerThreshold": 0.4446,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.06,
+            "productionFRR": 0.02
+          },
+          {
+            "subject": "s050",
+            "eer": 0.049,
+            "eerThreshold": 0.4105,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.052,
+            "productionFRR": 0.05
+          },
+          {
+            "subject": "s051",
+            "eer": 0.131,
+            "eerThreshold": 0.312,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.092,
+            "productionFRR": 0.32
+          },
+          {
+            "subject": "s052",
+            "eer": 0.009,
+            "eerThreshold": 0.2967,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0,
+            "productionFRR": 0.045
+          },
+          {
+            "subject": "s053",
+            "eer": 0.0155,
+            "eerThreshold": 0.2784,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0,
+            "productionFRR": 0.05
+          },
+          {
+            "subject": "s054",
+            "eer": 0.0645,
+            "eerThreshold": 0.3248,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.024,
+            "productionFRR": 0.22
+          },
+          {
+            "subject": "s055",
+            "eer": 0.0045,
+            "eerThreshold": 0.3551,
+            "calibratedThreshold": 0.434,
+            "productionFAR": 0.004,
+            "productionFRR": 0.05
+          },
+          {
+            "subject": "s056",
+            "eer": 0.06,
+            "eerThreshold": 0.3947,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.06,
+            "productionFRR": 0.065
+          },
+          {
+            "subject": "s057",
+            "eer": 0.08,
+            "eerThreshold": 0.3902,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.076,
+            "productionFRR": 0.095
+          }
+        ]
+      },
+      "enroll10First": {
+        "meanEER": 0.2694,
+        "sdEER": 0.1649,
+        "medianEER": 0.231,
+        "minEER": 0.02,
+        "maxEER": 0.6355,
+        "pooledEER": 0.2851,
+        "pooledEERThreshold": 0.2566,
+        "meanEERThreshold": 0.2768,
+        "production": {
+          "rule": "max(0.85, min(0.97, median(LOO) - 3*MAD(LOO)))",
+          "meanCalibratedRaw": 0.2369,
+          "meanThreshold": 0.4103,
+          "usersAtFloor": 0,
+          "meanFAR": 0.1048,
+          "meanFRR": 0.6448
+        },
+        "floorSweep": [
+          {
+            "floor": 0.5,
+            "meanFAR": 0.0471,
+            "meanFRR": 0.8087
+          },
+          {
+            "floor": 0.6,
+            "meanFAR": 0.0163,
+            "meanFRR": 0.9209
+          },
+          {
+            "floor": 0.7,
+            "meanFAR": 0.0027,
+            "meanFRR": 0.9723
+          },
+          {
+            "floor": 0.75,
+            "meanFAR": 0.0013,
+            "meanFRR": 0.9884
+          },
+          {
+            "floor": 0.8,
+            "meanFAR": 0.0002,
+            "meanFRR": 0.9965
+          },
+          {
+            "floor": 0.85,
+            "meanFAR": 0,
+            "meanFRR": 0.9991
+          },
+          {
+            "floor": 0.9,
+            "meanFAR": 0,
+            "meanFRR": 1
+          }
+        ],
+        "fixedThreshold": [
+          {
+            "threshold": 0.5,
+            "meanFAR": 0.0472,
+            "meanFRR": 0.8074
+          },
+          {
+            "threshold": 0.6,
+            "meanFAR": 0.0163,
+            "meanFRR": 0.9209
+          },
+          {
+            "threshold": 0.7,
+            "meanFAR": 0.0027,
+            "meanFRR": 0.9723
+          },
+          {
+            "threshold": 0.75,
+            "meanFAR": 0.0013,
+            "meanFRR": 0.9884
+          },
+          {
+            "threshold": 0.8,
+            "meanFAR": 0.0002,
+            "meanFRR": 0.9965
+          },
+          {
+            "threshold": 0.85,
+            "meanFAR": 0,
+            "meanFRR": 0.9991
+          },
+          {
+            "threshold": 0.9,
+            "meanFAR": 0,
+            "meanFRR": 1
+          },
+          {
+            "threshold": 0.95,
+            "meanFAR": 0,
+            "meanFRR": 1
+          }
+        ],
+        "looPercentileRule": {
+          "rule": "10th percentile of leave-one-out enrollment scores, no floor",
+          "meanThreshold": 0.2627,
+          "meanFAR": 0.3218,
+          "meanFRR": 0.3246
+        },
+        "whatIf": {
+          "arithmeticMeanFusion": {
+            "meanEER": 0.3116,
+            "meanEERThreshold": 0.5659
+          },
+          "outlierCount196": {
+            "meanEER": 0.3052,
+            "meanEERThreshold": 0.7696
+          }
+        },
+        "perUser": [
+          {
+            "subject": "s002",
+            "eer": 0.371,
+            "eerThreshold": 0.2711,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.148,
+            "productionFRR": 0.835
+          },
+          {
+            "subject": "s003",
+            "eer": 0.529,
+            "eerThreshold": 0.1085,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.04,
+            "productionFRR": 1
+          },
+          {
+            "subject": "s004",
+            "eer": 0.34,
+            "eerThreshold": 0.2578,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.14,
+            "productionFRR": 0.84
+          },
+          {
+            "subject": "s005",
+            "eer": 0.14,
+            "eerThreshold": 0.2621,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.036,
+            "productionFRR": 0.86
+          },
+          {
+            "subject": "s007",
+            "eer": 0.5845,
+            "eerThreshold": 0.1701,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.176,
+            "productionFRR": 0.995
+          },
+          {
+            "subject": "s008",
+            "eer": 0.2155,
+            "eerThreshold": 0.2592,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.072,
+            "productionFRR": 0.89
+          },
+          {
+            "subject": "s010",
+            "eer": 0.0445,
+            "eerThreshold": 0.4827,
+            "calibratedThreshold": 0.4179,
+            "productionFAR": 0.068,
+            "productionFRR": 0.02
+          },
+          {
+            "subject": "s011",
+            "eer": 0.4355,
+            "eerThreshold": 0.1558,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.056,
+            "productionFRR": 1
+          },
+          {
+            "subject": "s012",
+            "eer": 0.2155,
+            "eerThreshold": 0.0915,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0,
+            "productionFRR": 1
+          },
+          {
+            "subject": "s013",
+            "eer": 0.091,
+            "eerThreshold": 0.377,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.076,
+            "productionFRR": 0.105
+          },
+          {
+            "subject": "s015",
+            "eer": 0.411,
+            "eerThreshold": 0.2348,
+            "calibratedThreshold": 0.517,
+            "productionFAR": 0.052,
+            "productionFRR": 0.99
+          },
+          {
+            "subject": "s016",
+            "eer": 0.1445,
+            "eerThreshold": 0.2945,
+            "calibratedThreshold": 0.4815,
+            "productionFAR": 0.008,
+            "productionFRR": 0.8
+          },
+          {
+            "subject": "s017",
+            "eer": 0.031,
+            "eerThreshold": 0.4186,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.036,
+            "productionFRR": 0.015
+          },
+          {
+            "subject": "s018",
+            "eer": 0.531,
+            "eerThreshold": 0.2826,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.336,
+            "productionFRR": 0.835
+          },
+          {
+            "subject": "s019",
+            "eer": 0.191,
+            "eerThreshold": 0.2473,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.044,
+            "productionFRR": 0.84
+          },
+          {
+            "subject": "s020",
+            "eer": 0.22,
+            "eerThreshold": 0.2418,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.048,
+            "productionFRR": 0.725
+          },
+          {
+            "subject": "s021",
+            "eer": 0.24,
+            "eerThreshold": 0.3024,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.076,
+            "productionFRR": 0.57
+          },
+          {
+            "subject": "s022",
+            "eer": 0.1245,
+            "eerThreshold": 0.3078,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.048,
+            "productionFRR": 0.44
+          },
+          {
+            "subject": "s024",
+            "eer": 0.071,
+            "eerThreshold": 0.4157,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.08,
+            "productionFRR": 0.065
+          },
+          {
+            "subject": "s025",
+            "eer": 0.26,
+            "eerThreshold": 0.422,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.296,
+            "productionFRR": 0.195
+          },
+          {
+            "subject": "s026",
+            "eer": 0.1045,
+            "eerThreshold": 0.3932,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.104,
+            "productionFRR": 0.11
+          },
+          {
+            "subject": "s027",
+            "eer": 0.189,
+            "eerThreshold": 0.2771,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.036,
+            "productionFRR": 0.575
+          },
+          {
+            "subject": "s028",
+            "eer": 0.1755,
+            "eerThreshold": 0.2856,
+            "calibratedThreshold": 0.4556,
+            "productionFAR": 0.02,
+            "productionFRR": 0.74
+          },
+          {
+            "subject": "s029",
+            "eer": 0.1755,
+            "eerThreshold": 0.3364,
+            "calibratedThreshold": 0.494,
+            "productionFAR": 0.056,
+            "productionFRR": 0.665
+          },
+          {
+            "subject": "s030",
+            "eer": 0.6355,
+            "eerThreshold": 0.1219,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.188,
+            "productionFRR": 1
+          },
+          {
+            "subject": "s031",
+            "eer": 0.52,
+            "eerThreshold": 0.1609,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.064,
+            "productionFRR": 0.99
+          },
+          {
+            "subject": "s032",
+            "eer": 0.4645,
+            "eerThreshold": 0.2407,
+            "calibratedThreshold": 0.4342,
+            "productionFAR": 0.168,
+            "productionFRR": 0.88
+          },
+          {
+            "subject": "s033",
+            "eer": 0.1045,
+            "eerThreshold": 0.1528,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0,
+            "productionFRR": 0.925
+          },
+          {
+            "subject": "s034",
+            "eer": 0.4755,
+            "eerThreshold": 0.1977,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.196,
+            "productionFRR": 0.97
+          },
+          {
+            "subject": "s035",
+            "eer": 0.3755,
+            "eerThreshold": 0.2595,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.18,
+            "productionFRR": 0.69
+          },
+          {
+            "subject": "s036",
+            "eer": 0.02,
+            "eerThreshold": 0.378,
+            "calibratedThreshold": 0.4208,
+            "productionFAR": 0.012,
+            "productionFRR": 0.055
+          },
+          {
+            "subject": "s037",
+            "eer": 0.2245,
+            "eerThreshold": 0.3293,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.112,
+            "productionFRR": 0.45
+          },
+          {
+            "subject": "s038",
+            "eer": 0.3355,
+            "eerThreshold": 0.33,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.208,
+            "productionFRR": 0.57
+          },
+          {
+            "subject": "s039",
+            "eer": 0.2155,
+            "eerThreshold": 0.3513,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.132,
+            "productionFRR": 0.355
+          },
+          {
+            "subject": "s040",
+            "eer": 0.251,
+            "eerThreshold": 0.2918,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.068,
+            "productionFRR": 0.535
+          },
+          {
+            "subject": "s041",
+            "eer": 0.369,
+            "eerThreshold": 0.1588,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.028,
+            "productionFRR": 0.905
+          },
+          {
+            "subject": "s042",
+            "eer": 0.429,
+            "eerThreshold": 0.196,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.096,
+            "productionFRR": 0.98
+          },
+          {
+            "subject": "s043",
+            "eer": 0.1645,
+            "eerThreshold": 0.2746,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.028,
+            "productionFRR": 0.61
+          },
+          {
+            "subject": "s044",
+            "eer": 0.2355,
+            "eerThreshold": 0.3371,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.148,
+            "productionFRR": 0.445
+          },
+          {
+            "subject": "s046",
+            "eer": 0.5645,
+            "eerThreshold": 0.3351,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.464,
+            "productionFRR": 0.705
+          },
+          {
+            "subject": "s047",
+            "eer": 0.449,
+            "eerThreshold": 0.2163,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.104,
+            "productionFRR": 0.975
+          },
+          {
+            "subject": "s048",
+            "eer": 0.351,
+            "eerThreshold": 0.3618,
+            "calibratedThreshold": 0.5043,
+            "productionFAR": 0.172,
+            "productionFRR": 0.925
+          },
+          {
+            "subject": "s049",
+            "eer": 0.1,
+            "eerThreshold": 0.3141,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.044,
+            "productionFRR": 0.345
+          },
+          {
+            "subject": "s050",
+            "eer": 0.28,
+            "eerThreshold": 0.3365,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.172,
+            "productionFRR": 0.545
+          },
+          {
+            "subject": "s051",
+            "eer": 0.3045,
+            "eerThreshold": 0.2403,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.12,
+            "productionFRR": 0.77
+          },
+          {
+            "subject": "s052",
+            "eer": 0.06,
+            "eerThreshold": 0.2393,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0,
+            "productionFRR": 0.41
+          },
+          {
+            "subject": "s053",
+            "eer": 0.0445,
+            "eerThreshold": 0.2026,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0,
+            "productionFRR": 0.46
+          },
+          {
+            "subject": "s054",
+            "eer": 0.451,
+            "eerThreshold": 0.3613,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.404,
+            "productionFRR": 0.665
+          },
+          {
+            "subject": "s055",
+            "eer": 0.1045,
+            "eerThreshold": 0.2811,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.024,
+            "productionFRR": 0.415
+          },
+          {
+            "subject": "s056",
+            "eer": 0.1445,
+            "eerThreshold": 0.3261,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.084,
+            "productionFRR": 0.49
+          },
+          {
+            "subject": "s057",
+            "eer": 0.231,
+            "eerThreshold": 0.2255,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.076,
+            "productionFRR": 0.71
+          }
+        ]
+      },
+      "enroll10Last": {
+        "meanEER": 0.06,
+        "sdEER": 0.0453,
+        "medianEER": 0.0445,
+        "minEER": 0,
+        "maxEER": 0.189,
+        "pooledEER": 0.0786,
+        "pooledEERThreshold": 0.236,
+        "meanEERThreshold": 0.252,
+        "production": {
+          "rule": "max(0.85, min(0.97, median(LOO) - 3*MAD(LOO)))",
+          "meanCalibratedRaw": 0.4241,
+          "meanThreshold": 0.4271,
+          "usersAtFloor": 0,
+          "meanFAR": 0.011,
+          "meanFRR": 0.3037
+        },
+        "floorSweep": [
+          {
+            "floor": 0.5,
+            "meanFAR": 0.0035,
+            "meanFRR": 0.4654
+          },
+          {
+            "floor": 0.6,
+            "meanFAR": 0.0011,
+            "meanFRR": 0.5964
+          },
+          {
+            "floor": 0.7,
+            "meanFAR": 0.0002,
+            "meanFRR": 0.7541
+          },
+          {
+            "floor": 0.75,
+            "meanFAR": 0,
+            "meanFRR": 0.8373
+          },
+          {
+            "floor": 0.8,
+            "meanFAR": 0,
+            "meanFRR": 0.9115
+          },
+          {
+            "floor": 0.85,
+            "meanFAR": 0,
+            "meanFRR": 0.9644
+          },
+          {
+            "floor": 0.9,
+            "meanFAR": 0,
+            "meanFRR": 0.9936
+          }
+        ],
+        "fixedThreshold": [
+          {
+            "threshold": 0.5,
+            "meanFAR": 0.0039,
+            "meanFRR": 0.4152
+          },
+          {
+            "threshold": 0.6,
+            "meanFAR": 0.0011,
+            "meanFRR": 0.5775
+          },
+          {
+            "threshold": 0.7,
+            "meanFAR": 0.0002,
+            "meanFRR": 0.7499
+          },
+          {
+            "threshold": 0.75,
+            "meanFAR": 0,
+            "meanFRR": 0.8363
+          },
+          {
+            "threshold": 0.8,
+            "meanFAR": 0,
+            "meanFRR": 0.9115
+          },
+          {
+            "threshold": 0.85,
+            "meanFAR": 0,
+            "meanFRR": 0.9644
+          },
+          {
+            "threshold": 0.9,
+            "meanFAR": 0,
+            "meanFRR": 0.9936
+          },
+          {
+            "threshold": 0.95,
+            "meanFAR": 0,
+            "meanFRR": 0.9996
+          }
+        ],
+        "looPercentileRule": {
+          "rule": "10th percentile of leave-one-out enrollment scores, no floor",
+          "meanThreshold": 0.3329,
+          "meanFAR": 0.0789,
+          "meanFRR": 0.1909
+        },
+        "whatIf": {
+          "arithmeticMeanFusion": {
+            "meanEER": 0.063,
+            "meanEERThreshold": 0.573
+          },
+          "outlierCount196": {
+            "meanEER": 0.068,
+            "meanEERThreshold": 0.7811
+          }
+        },
+        "perUser": [
+          {
+            "subject": "s002",
+            "eer": 0.189,
+            "eerThreshold": 0.1937,
+            "calibratedThreshold": 0.5945,
+            "productionFAR": 0,
+            "productionFRR": 0.595
+          },
+          {
+            "subject": "s003",
+            "eer": 0.029,
+            "eerThreshold": 0.1052,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0,
+            "productionFRR": 0.635
+          },
+          {
+            "subject": "s004",
+            "eer": 0.0445,
+            "eerThreshold": 0.3682,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.032,
+            "productionFRR": 0.065
+          },
+          {
+            "subject": "s005",
+            "eer": 0.0445,
+            "eerThreshold": 0.2577,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0,
+            "productionFRR": 0.16
+          },
+          {
+            "subject": "s007",
+            "eer": 0.0355,
+            "eerThreshold": 0.2036,
+            "calibratedThreshold": 0.447,
+            "productionFAR": 0,
+            "productionFRR": 0.45
+          },
+          {
+            "subject": "s008",
+            "eer": 0.0155,
+            "eerThreshold": 0.2515,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0,
+            "productionFRR": 0.07
+          },
+          {
+            "subject": "s010",
+            "eer": 0.0155,
+            "eerThreshold": 0.3625,
+            "calibratedThreshold": 0.4519,
+            "productionFAR": 0,
+            "productionFRR": 0.035
+          },
+          {
+            "subject": "s011",
+            "eer": 0.0355,
+            "eerThreshold": 0.158,
+            "calibratedThreshold": 0.4534,
+            "productionFAR": 0,
+            "productionFRR": 0.575
+          },
+          {
+            "subject": "s012",
+            "eer": 0.0045,
+            "eerThreshold": 0.1173,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0,
+            "productionFRR": 0.47
+          },
+          {
+            "subject": "s013",
+            "eer": 0.009,
+            "eerThreshold": 0.2479,
+            "calibratedThreshold": 0.6597,
+            "productionFAR": 0,
+            "productionFRR": 0.44
+          },
+          {
+            "subject": "s015",
+            "eer": 0.0845,
+            "eerThreshold": 0.3774,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.064,
+            "productionFRR": 0.145
+          },
+          {
+            "subject": "s016",
+            "eer": 0.1245,
+            "eerThreshold": 0.3566,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.068,
+            "productionFRR": 0.225
+          },
+          {
+            "subject": "s017",
+            "eer": 0.02,
+            "eerThreshold": 0.3973,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.02,
+            "productionFRR": 0.03
+          },
+          {
+            "subject": "s018",
+            "eer": 0.0445,
+            "eerThreshold": 0.2298,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.004,
+            "productionFRR": 0.255
+          },
+          {
+            "subject": "s019",
+            "eer": 0.029,
+            "eerThreshold": 0.235,
+            "calibratedThreshold": 0.4435,
+            "productionFAR": 0,
+            "productionFRR": 0.115
+          },
+          {
+            "subject": "s020",
+            "eer": 0.0755,
+            "eerThreshold": 0.1305,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0,
+            "productionFRR": 0.58
+          },
+          {
+            "subject": "s021",
+            "eer": 0.0555,
+            "eerThreshold": 0.2892,
+            "calibratedThreshold": 0.5289,
+            "productionFAR": 0,
+            "productionFRR": 0.36
+          },
+          {
+            "subject": "s022",
+            "eer": 0.029,
+            "eerThreshold": 0.1506,
+            "calibratedThreshold": 0.4039,
+            "productionFAR": 0,
+            "productionFRR": 0.42
+          },
+          {
+            "subject": "s024",
+            "eer": 0.08,
+            "eerThreshold": 0.3196,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.04,
+            "productionFRR": 0.14
+          },
+          {
+            "subject": "s025",
+            "eer": 0.0845,
+            "eerThreshold": 0.4238,
+            "calibratedThreshold": 0.4347,
+            "productionFAR": 0.08,
+            "productionFRR": 0.09
+          },
+          {
+            "subject": "s026",
+            "eer": 0.0755,
+            "eerThreshold": 0.2664,
+            "calibratedThreshold": 0.5338,
+            "productionFAR": 0,
+            "productionFRR": 0.275
+          },
+          {
+            "subject": "s027",
+            "eer": 0.0645,
+            "eerThreshold": 0.2446,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0,
+            "productionFRR": 0.175
+          },
+          {
+            "subject": "s028",
+            "eer": 0.0355,
+            "eerThreshold": 0.3336,
+            "calibratedThreshold": 0.427,
+            "productionFAR": 0.02,
+            "productionFRR": 0.135
+          },
+          {
+            "subject": "s029",
+            "eer": 0.0355,
+            "eerThreshold": 0.3481,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.02,
+            "productionFRR": 0.11
+          },
+          {
+            "subject": "s030",
+            "eer": 0.109,
+            "eerThreshold": 0.2136,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.008,
+            "productionFRR": 0.385
+          },
+          {
+            "subject": "s031",
+            "eer": 0.131,
+            "eerThreshold": 0.2419,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.008,
+            "productionFRR": 0.405
+          },
+          {
+            "subject": "s032",
+            "eer": 0.0955,
+            "eerThreshold": 0.218,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0,
+            "productionFRR": 0.475
+          },
+          {
+            "subject": "s033",
+            "eer": 0.1,
+            "eerThreshold": 0.1773,
+            "calibratedThreshold": 0.4042,
+            "productionFAR": 0.004,
+            "productionFRR": 0.77
+          },
+          {
+            "subject": "s034",
+            "eer": 0.031,
+            "eerThreshold": 0.1995,
+            "calibratedThreshold": 0.5437,
+            "productionFAR": 0,
+            "productionFRR": 0.395
+          },
+          {
+            "subject": "s035",
+            "eer": 0.1445,
+            "eerThreshold": 0.2334,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.04,
+            "productionFRR": 0.47
+          },
+          {
+            "subject": "s036",
+            "eer": 0.0155,
+            "eerThreshold": 0.2614,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.004,
+            "productionFRR": 0.04
+          },
+          {
+            "subject": "s037",
+            "eer": 0.0555,
+            "eerThreshold": 0.213,
+            "calibratedThreshold": 0.4567,
+            "productionFAR": 0,
+            "productionFRR": 0.535
+          },
+          {
+            "subject": "s038",
+            "eer": 0.0845,
+            "eerThreshold": 0.1945,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0,
+            "productionFRR": 0.27
+          },
+          {
+            "subject": "s039",
+            "eer": 0.051,
+            "eerThreshold": 0.295,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0,
+            "productionFRR": 0.1
+          },
+          {
+            "subject": "s040",
+            "eer": 0.1245,
+            "eerThreshold": 0.0995,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0,
+            "productionFRR": 0.93
+          },
+          {
+            "subject": "s041",
+            "eer": 0.06,
+            "eerThreshold": 0.1482,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0,
+            "productionFRR": 0.63
+          },
+          {
+            "subject": "s042",
+            "eer": 0.0155,
+            "eerThreshold": 0.3174,
+            "calibratedThreshold": 0.4047,
+            "productionFAR": 0,
+            "productionFRR": 0.07
+          },
+          {
+            "subject": "s043",
+            "eer": 0.029,
+            "eerThreshold": 0.2546,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0,
+            "productionFRR": 0.13
+          },
+          {
+            "subject": "s044",
+            "eer": 0.1155,
+            "eerThreshold": 0.2535,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.024,
+            "productionFRR": 0.28
+          },
+          {
+            "subject": "s046",
+            "eer": 0.1155,
+            "eerThreshold": 0.2847,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.02,
+            "productionFRR": 0.235
+          },
+          {
+            "subject": "s047",
+            "eer": 0.169,
+            "eerThreshold": 0.2839,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.028,
+            "productionFRR": 0.46
+          },
+          {
+            "subject": "s048",
+            "eer": 0.02,
+            "eerThreshold": 0.324,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.008,
+            "productionFRR": 0.055
+          },
+          {
+            "subject": "s049",
+            "eer": 0.1,
+            "eerThreshold": 0.202,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.004,
+            "productionFRR": 0.3
+          },
+          {
+            "subject": "s050",
+            "eer": 0.04,
+            "eerThreshold": 0.2905,
+            "calibratedThreshold": 0.4077,
+            "productionFAR": 0.008,
+            "productionFRR": 0.12
+          },
+          {
+            "subject": "s051",
+            "eer": 0.029,
+            "eerThreshold": 0.2694,
+            "calibratedThreshold": 0.44,
+            "productionFAR": 0,
+            "productionFRR": 0.295
+          },
+          {
+            "subject": "s052",
+            "eer": 0.0045,
+            "eerThreshold": 0.1497,
+            "calibratedThreshold": 0.4971,
+            "productionFAR": 0,
+            "productionFRR": 0.465
+          },
+          {
+            "subject": "s053",
+            "eer": 0.0155,
+            "eerThreshold": 0.2626,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0,
+            "productionFRR": 0.115
+          },
+          {
+            "subject": "s054",
+            "eer": 0.0245,
+            "eerThreshold": 0.224,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0,
+            "productionFRR": 0.455
+          },
+          {
+            "subject": "s055",
+            "eer": 0,
+            "eerThreshold": 0.2603,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0,
+            "productionFRR": 0.02
+          },
+          {
+            "subject": "s056",
+            "eer": 0.091,
+            "eerThreshold": 0.3116,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.052,
+            "productionFRR": 0.29
+          },
+          {
+            "subject": "s057",
+            "eer": 0.029,
+            "eerThreshold": 0.3028,
+            "calibratedThreshold": 0.4491,
+            "productionFAR": 0.004,
+            "productionFRR": 0.245
+          }
+        ]
+      },
+      "enroll150Interleaved": {
+        "meanEER": 0.0898,
+        "sdEER": 0.0574,
+        "medianEER": 0.08,
+        "minEER": 0.002,
+        "maxEER": 0.26,
+        "pooledEER": 0.0992,
+        "pooledEERThreshold": 0.3515,
+        "meanEERThreshold": 0.3488,
+        "production": {
+          "rule": "max(0.85, min(0.97, median(LOO) - 3*MAD(LOO)))",
+          "meanCalibratedRaw": 0.3125,
+          "meanThreshold": 0.4112,
+          "usersAtFloor": 0,
+          "meanFAR": 0.067,
+          "meanFRR": 0.1373
+        },
+        "floorSweep": [
+          {
+            "floor": 0.5,
+            "meanFAR": 0.0276,
+            "meanFRR": 0.229
+          },
+          {
+            "floor": 0.6,
+            "meanFAR": 0.0085,
+            "meanFRR": 0.3592
+          },
+          {
+            "floor": 0.7,
+            "meanFAR": 0.0018,
+            "meanFRR": 0.522
+          },
+          {
+            "floor": 0.75,
+            "meanFAR": 0.0004,
+            "meanFRR": 0.6306
+          },
+          {
+            "floor": 0.8,
+            "meanFAR": 0.0001,
+            "meanFRR": 0.7467
+          },
+          {
+            "floor": 0.85,
+            "meanFAR": 0,
+            "meanFRR": 0.8639
+          },
+          {
+            "floor": 0.9,
+            "meanFAR": 0,
+            "meanFRR": 0.9612
+          }
+        ],
+        "fixedThreshold": [
+          {
+            "threshold": 0.5,
+            "meanFAR": 0.0281,
+            "meanFRR": 0.2255
+          },
+          {
+            "threshold": 0.6,
+            "meanFAR": 0.0085,
+            "meanFRR": 0.3588
+          },
+          {
+            "threshold": 0.7,
+            "meanFAR": 0.0018,
+            "meanFRR": 0.522
+          },
+          {
+            "threshold": 0.75,
+            "meanFAR": 0.0004,
+            "meanFRR": 0.6306
+          },
+          {
+            "threshold": 0.8,
+            "meanFAR": 0.0001,
+            "meanFRR": 0.7467
+          },
+          {
+            "threshold": 0.85,
+            "meanFAR": 0,
+            "meanFRR": 0.8639
+          },
+          {
+            "threshold": 0.9,
+            "meanFAR": 0,
+            "meanFRR": 0.9612
+          },
+          {
+            "threshold": 0.95,
+            "meanFAR": 0,
+            "meanFRR": 0.9969
+          }
+        ],
+        "looPercentileRule": {
+          "rule": "10th percentile of leave-one-out enrollment scores, no floor",
+          "meanThreshold": 0.3462,
+          "meanFAR": 0.1249,
+          "meanFRR": 0.082
+        },
+        "whatIf": {
+          "arithmeticMeanFusion": {
+            "meanEER": 0.0741,
+            "meanEERThreshold": 0.6426
+          },
+          "outlierCount196": {
+            "meanEER": 0.0965,
+            "meanEERThreshold": 0.8316
+          }
+        },
+        "perUser": [
+          {
+            "subject": "s002",
+            "eer": 0.084,
+            "eerThreshold": 0.4632,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.156,
+            "productionFRR": 0.08
+          },
+          {
+            "subject": "s003",
+            "eer": 0.056,
+            "eerThreshold": 0.2841,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.008,
+            "productionFRR": 0.08
+          },
+          {
+            "subject": "s004",
+            "eer": 0.06,
+            "eerThreshold": 0.4314,
+            "calibratedThreshold": 0.4071,
+            "productionFAR": 0.076,
+            "productionFRR": 0.06
+          },
+          {
+            "subject": "s005",
+            "eer": 0.06,
+            "eerThreshold": 0.2827,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.008,
+            "productionFRR": 0.16
+          },
+          {
+            "subject": "s007",
+            "eer": 0.08,
+            "eerThreshold": 0.3575,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.052,
+            "productionFRR": 0.1
+          },
+          {
+            "subject": "s008",
+            "eer": 0.064,
+            "eerThreshold": 0.3095,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.032,
+            "productionFRR": 0.1
+          },
+          {
+            "subject": "s010",
+            "eer": 0.038,
+            "eerThreshold": 0.3464,
+            "calibratedThreshold": 0.4204,
+            "productionFAR": 0.012,
+            "productionFRR": 0.08
+          },
+          {
+            "subject": "s011",
+            "eer": 0.04,
+            "eerThreshold": 0.2948,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.012,
+            "productionFRR": 0.16
+          },
+          {
+            "subject": "s012",
+            "eer": 0.04,
+            "eerThreshold": 0.2032,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.008,
+            "productionFRR": 0.2
+          },
+          {
+            "subject": "s013",
+            "eer": 0.056,
+            "eerThreshold": 0.289,
+            "calibratedThreshold": 0.4293,
+            "productionFAR": 0.024,
+            "productionFRR": 0.16
+          },
+          {
+            "subject": "s015",
+            "eer": 0.082,
+            "eerThreshold": 0.3848,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.084,
+            "productionFRR": 0.12
+          },
+          {
+            "subject": "s016",
+            "eer": 0.08,
+            "eerThreshold": 0.4202,
+            "calibratedThreshold": 0.4171,
+            "productionFAR": 0.08,
+            "productionFRR": 0.08
+          },
+          {
+            "subject": "s017",
+            "eer": 0.02,
+            "eerThreshold": 0.4859,
+            "calibratedThreshold": 0.5069,
+            "productionFAR": 0.016,
+            "productionFRR": 0.06
+          },
+          {
+            "subject": "s018",
+            "eer": 0.08,
+            "eerThreshold": 0.2514,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.024,
+            "productionFRR": 0.28
+          },
+          {
+            "subject": "s019",
+            "eer": 0.08,
+            "eerThreshold": 0.2767,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.008,
+            "productionFRR": 0.12
+          },
+          {
+            "subject": "s020",
+            "eer": 0.16,
+            "eerThreshold": 0.2126,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.012,
+            "productionFRR": 0.32
+          },
+          {
+            "subject": "s021",
+            "eer": 0.06,
+            "eerThreshold": 0.3976,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.056,
+            "productionFRR": 0.06
+          },
+          {
+            "subject": "s022",
+            "eer": 0.002,
+            "eerThreshold": 0.3429,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.004,
+            "productionFRR": 0.02
+          },
+          {
+            "subject": "s024",
+            "eer": 0.1,
+            "eerThreshold": 0.3472,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.056,
+            "productionFRR": 0.1
+          },
+          {
+            "subject": "s025",
+            "eer": 0.118,
+            "eerThreshold": 0.4342,
+            "calibratedThreshold": 0.4044,
+            "productionFAR": 0.148,
+            "productionFRR": 0.08
+          },
+          {
+            "subject": "s026",
+            "eer": 0.08,
+            "eerThreshold": 0.3743,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.068,
+            "productionFRR": 0.08
+          },
+          {
+            "subject": "s027",
+            "eer": 0.08,
+            "eerThreshold": 0.3622,
+            "calibratedThreshold": 0.4043,
+            "productionFAR": 0.048,
+            "productionFRR": 0.12
+          },
+          {
+            "subject": "s028",
+            "eer": 0.06,
+            "eerThreshold": 0.3436,
+            "calibratedThreshold": 0.404,
+            "productionFAR": 0.04,
+            "productionFRR": 0.08
+          },
+          {
+            "subject": "s029",
+            "eer": 0.038,
+            "eerThreshold": 0.3909,
+            "calibratedThreshold": 0.4412,
+            "productionFAR": 0.016,
+            "productionFRR": 0.06
+          },
+          {
+            "subject": "s030",
+            "eer": 0.2,
+            "eerThreshold": 0.3322,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.136,
+            "productionFRR": 0.26
+          },
+          {
+            "subject": "s031",
+            "eer": 0.244,
+            "eerThreshold": 0.4616,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.344,
+            "productionFRR": 0.16
+          },
+          {
+            "subject": "s032",
+            "eer": 0.12,
+            "eerThreshold": 0.3567,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.092,
+            "productionFRR": 0.16
+          },
+          {
+            "subject": "s033",
+            "eer": 0.062,
+            "eerThreshold": 0.3997,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.064,
+            "productionFRR": 0.08
+          },
+          {
+            "subject": "s034",
+            "eer": 0.1,
+            "eerThreshold": 0.3315,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.052,
+            "productionFRR": 0.1
+          },
+          {
+            "subject": "s035",
+            "eer": 0.178,
+            "eerThreshold": 0.291,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.084,
+            "productionFRR": 0.4
+          },
+          {
+            "subject": "s036",
+            "eer": 0.04,
+            "eerThreshold": 0.3673,
+            "calibratedThreshold": 0.6009,
+            "productionFAR": 0,
+            "productionFRR": 0.12
+          },
+          {
+            "subject": "s037",
+            "eer": 0.1,
+            "eerThreshold": 0.3059,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.04,
+            "productionFRR": 0.22
+          },
+          {
+            "subject": "s038",
+            "eer": 0.2,
+            "eerThreshold": 0.3987,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.196,
+            "productionFRR": 0.2
+          },
+          {
+            "subject": "s039",
+            "eer": 0.08,
+            "eerThreshold": 0.3607,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.04,
+            "productionFRR": 0.08
+          },
+          {
+            "subject": "s040",
+            "eer": 0.16,
+            "eerThreshold": 0.3754,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.136,
+            "productionFRR": 0.18
+          },
+          {
+            "subject": "s041",
+            "eer": 0.084,
+            "eerThreshold": 0.275,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.008,
+            "productionFRR": 0.32
+          },
+          {
+            "subject": "s042",
+            "eer": 0.08,
+            "eerThreshold": 0.3623,
+            "calibratedThreshold": 0.423,
+            "productionFAR": 0.04,
+            "productionFRR": 0.08
+          },
+          {
+            "subject": "s043",
+            "eer": 0.04,
+            "eerThreshold": 0.3365,
+            "calibratedThreshold": 0.4526,
+            "productionFAR": 0.004,
+            "productionFRR": 0.2
+          },
+          {
+            "subject": "s044",
+            "eer": 0.16,
+            "eerThreshold": 0.3808,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.136,
+            "productionFRR": 0.18
+          },
+          {
+            "subject": "s046",
+            "eer": 0.2,
+            "eerThreshold": 0.4155,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.244,
+            "productionFRR": 0.16
+          },
+          {
+            "subject": "s047",
+            "eer": 0.26,
+            "eerThreshold": 0.46,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.332,
+            "productionFRR": 0.18
+          },
+          {
+            "subject": "s048",
+            "eer": 0.06,
+            "eerThreshold": 0.3968,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.056,
+            "productionFRR": 0.06
+          },
+          {
+            "subject": "s049",
+            "eer": 0.098,
+            "eerThreshold": 0.3817,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.076,
+            "productionFRR": 0.18
+          },
+          {
+            "subject": "s050",
+            "eer": 0.06,
+            "eerThreshold": 0.3857,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.048,
+            "productionFRR": 0.08
+          },
+          {
+            "subject": "s051",
+            "eer": 0.098,
+            "eerThreshold": 0.3917,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.088,
+            "productionFRR": 0.1
+          },
+          {
+            "subject": "s052",
+            "eer": 0.02,
+            "eerThreshold": 0.2465,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0,
+            "productionFRR": 0.06
+          },
+          {
+            "subject": "s053",
+            "eer": 0.04,
+            "eerThreshold": 0.2224,
+            "calibratedThreshold": 0.4037,
+            "productionFAR": 0,
+            "productionFRR": 0.16
+          },
+          {
+            "subject": "s054",
+            "eer": 0.098,
+            "eerThreshold": 0.2776,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.02,
+            "productionFRR": 0.2
+          },
+          {
+            "subject": "s055",
+            "eer": 0.02,
+            "eerThreshold": 0.2316,
+            "calibratedThreshold": 0.4567,
+            "productionFAR": 0,
+            "productionFRR": 0.12
+          },
+          {
+            "subject": "s056",
+            "eer": 0.06,
+            "eerThreshold": 0.4104,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.06,
+            "productionFRR": 0.06
+          },
+          {
+            "subject": "s057",
+            "eer": 0.1,
+            "eerThreshold": 0.3493,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.072,
+            "productionFRR": 0.14
+          }
+        ]
+      }
+    },
+    "usernameField": {
+      "description": "keys visible: the password-field features plus per-key hold times and per-digraph down-down latencies (the product learns these for the username)",
+      "enroll200": {
+        "meanEER": 0.0819,
+        "sdEER": 0.0673,
+        "medianEER": 0.0645,
+        "minEER": 0.0045,
+        "maxEER": 0.2845,
+        "pooledEER": 0.0929,
+        "pooledEERThreshold": 0.3758,
+        "meanEERThreshold": 0.3787,
+        "production": {
+          "rule": "max(0.85, min(0.97, median(LOO) - 3*MAD(LOO)))",
+          "meanCalibratedRaw": 0.3338,
+          "meanThreshold": 0.4162,
+          "usersAtFloor": 0,
+          "meanFAR": 0.0727,
+          "meanFRR": 0.1221
+        },
+        "floorSweep": [
+          {
+            "floor": 0.5,
+            "meanFAR": 0.0317,
+            "meanFRR": 0.2398
+          },
+          {
+            "floor": 0.6,
+            "meanFAR": 0.0109,
+            "meanFRR": 0.4083
+          },
+          {
+            "floor": 0.7,
+            "meanFAR": 0.0023,
+            "meanFRR": 0.6085
+          },
+          {
+            "floor": 0.75,
+            "meanFAR": 0.0006,
+            "meanFRR": 0.7171
+          },
+          {
+            "floor": 0.8,
+            "meanFAR": 0.0001,
+            "meanFRR": 0.8266
+          },
+          {
+            "floor": 0.85,
+            "meanFAR": 0,
+            "meanFRR": 0.9213
+          },
+          {
+            "floor": 0.9,
+            "meanFAR": 0,
+            "meanFRR": 0.9833
+          }
+        ],
+        "fixedThreshold": [
+          {
+            "threshold": 0.5,
+            "meanFAR": 0.0324,
+            "meanFRR": 0.2368
+          },
+          {
+            "threshold": 0.6,
+            "meanFAR": 0.011,
+            "meanFRR": 0.4077
+          },
+          {
+            "threshold": 0.7,
+            "meanFAR": 0.0023,
+            "meanFRR": 0.6085
+          },
+          {
+            "threshold": 0.75,
+            "meanFAR": 0.0006,
+            "meanFRR": 0.7171
+          },
+          {
+            "threshold": 0.8,
+            "meanFAR": 0.0001,
+            "meanFRR": 0.8266
+          },
+          {
+            "threshold": 0.85,
+            "meanFAR": 0,
+            "meanFRR": 0.9213
+          },
+          {
+            "threshold": 0.9,
+            "meanFAR": 0,
+            "meanFRR": 0.9833
+          },
+          {
+            "threshold": 0.95,
+            "meanFAR": 0,
+            "meanFRR": 0.9995
+          }
+        ],
+        "looPercentileRule": {
+          "rule": "10th percentile of leave-one-out enrollment scores, no floor",
+          "meanThreshold": 0.3672,
+          "meanFAR": 0.1169,
+          "meanFRR": 0.082
+        },
+        "whatIf": {
+          "arithmeticMeanFusion": {
+            "meanEER": 0.086,
+            "meanEERThreshold": 0.6558
+          },
+          "outlierCount196": {
+            "meanEER": 0.0856,
+            "meanEERThreshold": 0.8456
+          }
+        },
+        "perUser": [
+          {
+            "subject": "s002",
+            "eer": 0.2555,
+            "eerThreshold": 0.3274,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.164,
+            "productionFRR": 0.295
+          },
+          {
+            "subject": "s003",
+            "eer": 0.1155,
+            "eerThreshold": 0.1852,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.008,
+            "productionFRR": 0.5
+          },
+          {
+            "subject": "s004",
+            "eer": 0.091,
+            "eerThreshold": 0.3891,
+            "calibratedThreshold": 0.4185,
+            "productionFAR": 0.076,
+            "productionFRR": 0.13
+          },
+          {
+            "subject": "s005",
+            "eer": 0.031,
+            "eerThreshold": 0.3338,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.016,
+            "productionFRR": 0.075
+          },
+          {
+            "subject": "s007",
+            "eer": 0.08,
+            "eerThreshold": 0.3641,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.052,
+            "productionFRR": 0.145
+          },
+          {
+            "subject": "s008",
+            "eer": 0.031,
+            "eerThreshold": 0.3946,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.032,
+            "productionFRR": 0.04
+          },
+          {
+            "subject": "s010",
+            "eer": 0.0155,
+            "eerThreshold": 0.4152,
+            "calibratedThreshold": 0.4324,
+            "productionFAR": 0.012,
+            "productionFRR": 0.03
+          },
+          {
+            "subject": "s011",
+            "eer": 0.0355,
+            "eerThreshold": 0.3199,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.016,
+            "productionFRR": 0.095
+          },
+          {
+            "subject": "s012",
+            "eer": 0.011,
+            "eerThreshold": 0.2564,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.008,
+            "productionFRR": 0.075
+          },
+          {
+            "subject": "s013",
+            "eer": 0.0245,
+            "eerThreshold": 0.3758,
+            "calibratedThreshold": 0.4213,
+            "productionFAR": 0.024,
+            "productionFRR": 0.05
+          },
+          {
+            "subject": "s015",
+            "eer": 0.0845,
+            "eerThreshold": 0.4093,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.088,
+            "productionFRR": 0.06
+          },
+          {
+            "subject": "s016",
+            "eer": 0.191,
+            "eerThreshold": 0.3729,
+            "calibratedThreshold": 0.4446,
+            "productionFAR": 0.084,
+            "productionFRR": 0.415
+          },
+          {
+            "subject": "s017",
+            "eer": 0.029,
+            "eerThreshold": 0.4718,
+            "calibratedThreshold": 0.562,
+            "productionFAR": 0.012,
+            "productionFRR": 0.06
+          },
+          {
+            "subject": "s018",
+            "eer": 0.06,
+            "eerThreshold": 0.3014,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.024,
+            "productionFRR": 0.135
+          },
+          {
+            "subject": "s019",
+            "eer": 0.0245,
+            "eerThreshold": 0.3542,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.008,
+            "productionFRR": 0.06
+          },
+          {
+            "subject": "s020",
+            "eer": 0.1,
+            "eerThreshold": 0.2722,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.012,
+            "productionFRR": 0.2
+          },
+          {
+            "subject": "s021",
+            "eer": 0.08,
+            "eerThreshold": 0.3766,
+            "calibratedThreshold": 0.4062,
+            "productionFAR": 0.06,
+            "productionFRR": 0.105
+          },
+          {
+            "subject": "s022",
+            "eer": 0.02,
+            "eerThreshold": 0.3418,
+            "calibratedThreshold": 0.4174,
+            "productionFAR": 0.004,
+            "productionFRR": 0.065
+          },
+          {
+            "subject": "s024",
+            "eer": 0.0555,
+            "eerThreshold": 0.4261,
+            "calibratedThreshold": 0.4207,
+            "productionFAR": 0.06,
+            "productionFRR": 0.055
+          },
+          {
+            "subject": "s025",
+            "eer": 0.089,
+            "eerThreshold": 0.5118,
+            "calibratedThreshold": 0.4318,
+            "productionFAR": 0.136,
+            "productionFRR": 0.065
+          },
+          {
+            "subject": "s026",
+            "eer": 0.08,
+            "eerThreshold": 0.3899,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.068,
+            "productionFRR": 0.08
+          },
+          {
+            "subject": "s027",
+            "eer": 0.049,
+            "eerThreshold": 0.4072,
+            "calibratedThreshold": 0.4322,
+            "productionFAR": 0.036,
+            "productionFRR": 0.065
+          },
+          {
+            "subject": "s028",
+            "eer": 0.04,
+            "eerThreshold": 0.429,
+            "calibratedThreshold": 0.4321,
+            "productionFAR": 0.04,
+            "productionFRR": 0.045
+          },
+          {
+            "subject": "s029",
+            "eer": 0.0645,
+            "eerThreshold": 0.3456,
+            "calibratedThreshold": 0.4616,
+            "productionFAR": 0.016,
+            "productionFRR": 0.125
+          },
+          {
+            "subject": "s030",
+            "eer": 0.129,
+            "eerThreshold": 0.4314,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.156,
+            "productionFRR": 0.085
+          },
+          {
+            "subject": "s031",
+            "eer": 0.2645,
+            "eerThreshold": 0.4693,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.36,
+            "productionFRR": 0.155
+          },
+          {
+            "subject": "s032",
+            "eer": 0.2355,
+            "eerThreshold": 0.2548,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.108,
+            "productionFRR": 0.505
+          },
+          {
+            "subject": "s033",
+            "eer": 0.111,
+            "eerThreshold": 0.3449,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.064,
+            "productionFRR": 0.18
+          },
+          {
+            "subject": "s034",
+            "eer": 0.091,
+            "eerThreshold": 0.3596,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.056,
+            "productionFRR": 0.17
+          },
+          {
+            "subject": "s035",
+            "eer": 0.16,
+            "eerThreshold": 0.3029,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.088,
+            "productionFRR": 0.3
+          },
+          {
+            "subject": "s036",
+            "eer": 0.0155,
+            "eerThreshold": 0.4287,
+            "calibratedThreshold": 0.5907,
+            "productionFAR": 0,
+            "productionFRR": 0.04
+          },
+          {
+            "subject": "s037",
+            "eer": 0.0755,
+            "eerThreshold": 0.3482,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.04,
+            "productionFRR": 0.135
+          },
+          {
+            "subject": "s038",
+            "eer": 0.091,
+            "eerThreshold": 0.4966,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.216,
+            "productionFRR": 0.05
+          },
+          {
+            "subject": "s039",
+            "eer": 0.049,
+            "eerThreshold": 0.3582,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.028,
+            "productionFRR": 0.07
+          },
+          {
+            "subject": "s040",
+            "eer": 0.1555,
+            "eerThreshold": 0.3815,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.14,
+            "productionFRR": 0.195
+          },
+          {
+            "subject": "s041",
+            "eer": 0.08,
+            "eerThreshold": 0.3009,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.016,
+            "productionFRR": 0.195
+          },
+          {
+            "subject": "s042",
+            "eer": 0.029,
+            "eerThreshold": 0.491,
+            "calibratedThreshold": 0.4637,
+            "productionFAR": 0.04,
+            "productionFRR": 0.025
+          },
+          {
+            "subject": "s043",
+            "eer": 0.029,
+            "eerThreshold": 0.3935,
+            "calibratedThreshold": 0.439,
+            "productionFAR": 0.02,
+            "productionFRR": 0.04
+          },
+          {
+            "subject": "s044",
+            "eer": 0.091,
+            "eerThreshold": 0.4552,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.144,
+            "productionFRR": 0.055
+          },
+          {
+            "subject": "s046",
+            "eer": 0.1245,
+            "eerThreshold": 0.4912,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.328,
+            "productionFRR": 0.04
+          },
+          {
+            "subject": "s047",
+            "eer": 0.2845,
+            "eerThreshold": 0.4609,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.36,
+            "productionFRR": 0.185
+          },
+          {
+            "subject": "s048",
+            "eer": 0.049,
+            "eerThreshold": 0.4357,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.072,
+            "productionFRR": 0.03
+          },
+          {
+            "subject": "s049",
+            "eer": 0.04,
+            "eerThreshold": 0.4633,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.084,
+            "productionFRR": 0.02
+          },
+          {
+            "subject": "s050",
+            "eer": 0.049,
+            "eerThreshold": 0.4242,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.06,
+            "productionFRR": 0.045
+          },
+          {
+            "subject": "s051",
+            "eer": 0.131,
+            "eerThreshold": 0.3265,
+            "calibratedThreshold": 0.403,
+            "productionFAR": 0.096,
+            "productionFRR": 0.295
+          },
+          {
+            "subject": "s052",
+            "eer": 0.009,
+            "eerThreshold": 0.3109,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0,
+            "productionFRR": 0.04
+          },
+          {
+            "subject": "s053",
+            "eer": 0.0155,
+            "eerThreshold": 0.2929,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0,
+            "productionFRR": 0.045
+          },
+          {
+            "subject": "s054",
+            "eer": 0.0645,
+            "eerThreshold": 0.3387,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.028,
+            "productionFRR": 0.17
+          },
+          {
+            "subject": "s055",
+            "eer": 0.0045,
+            "eerThreshold": 0.3683,
+            "calibratedThreshold": 0.447,
+            "productionFAR": 0.004,
+            "productionFRR": 0.05
+          },
+          {
+            "subject": "s056",
+            "eer": 0.06,
+            "eerThreshold": 0.4101,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.064,
+            "productionFRR": 0.055
+          },
+          {
+            "subject": "s057",
+            "eer": 0.08,
+            "eerThreshold": 0.4052,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.08,
+            "productionFRR": 0.08
+          }
+        ]
+      },
+      "enroll10First": {
+        "meanEER": 0.2691,
+        "sdEER": 0.1647,
+        "medianEER": 0.231,
+        "minEER": 0.02,
+        "maxEER": 0.6355,
+        "pooledEER": 0.2851,
+        "pooledEERThreshold": 0.2721,
+        "meanEERThreshold": 0.2918,
+        "production": {
+          "rule": "max(0.85, min(0.97, median(LOO) - 3*MAD(LOO)))",
+          "meanCalibratedRaw": 0.2559,
+          "meanThreshold": 0.4126,
+          "usersAtFloor": 0,
+          "meanFAR": 0.1148,
+          "meanFRR": 0.6142
+        },
+        "floorSweep": [
+          {
+            "floor": 0.5,
+            "meanFAR": 0.0557,
+            "meanFRR": 0.7858
+          },
+          {
+            "floor": 0.6,
+            "meanFAR": 0.0191,
+            "meanFRR": 0.9082
+          },
+          {
+            "floor": 0.7,
+            "meanFAR": 0.0035,
+            "meanFRR": 0.9687
+          },
+          {
+            "floor": 0.75,
+            "meanFAR": 0.0016,
+            "meanFRR": 0.9857
+          },
+          {
+            "floor": 0.8,
+            "meanFAR": 0.0003,
+            "meanFRR": 0.9957
+          },
+          {
+            "floor": 0.85,
+            "meanFAR": 0,
+            "meanFRR": 0.9988
+          },
+          {
+            "floor": 0.9,
+            "meanFAR": 0,
+            "meanFRR": 1
+          }
+        ],
+        "fixedThreshold": [
+          {
+            "threshold": 0.5,
+            "meanFAR": 0.0558,
+            "meanFRR": 0.7839
+          },
+          {
+            "threshold": 0.6,
+            "meanFAR": 0.0191,
+            "meanFRR": 0.9082
+          },
+          {
+            "threshold": 0.7,
+            "meanFAR": 0.0035,
+            "meanFRR": 0.9687
+          },
+          {
+            "threshold": 0.75,
+            "meanFAR": 0.0016,
+            "meanFRR": 0.9857
+          },
+          {
+            "threshold": 0.8,
+            "meanFAR": 0.0003,
+            "meanFRR": 0.9957
+          },
+          {
+            "threshold": 0.85,
+            "meanFAR": 0,
+            "meanFRR": 0.9988
+          },
+          {
+            "threshold": 0.9,
+            "meanFAR": 0,
+            "meanFRR": 1
+          },
+          {
+            "threshold": 0.95,
+            "meanFAR": 0,
+            "meanFRR": 1
+          }
+        ],
+        "looPercentileRule": {
+          "rule": "10th percentile of leave-one-out enrollment scores, no floor",
+          "meanThreshold": 0.2763,
+          "meanFAR": 0.3227,
+          "meanFRR": 0.3229
+        },
+        "whatIf": {
+          "arithmeticMeanFusion": {
+            "meanEER": 0.3099,
+            "meanEERThreshold": 0.5843
+          },
+          "outlierCount196": {
+            "meanEER": 0.3052,
+            "meanEERThreshold": 0.7776
+          }
+        },
+        "perUser": [
+          {
+            "subject": "s002",
+            "eer": 0.371,
+            "eerThreshold": 0.2869,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.16,
+            "productionFRR": 0.805
+          },
+          {
+            "subject": "s003",
+            "eer": 0.5245,
+            "eerThreshold": 0.1196,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.04,
+            "productionFRR": 1
+          },
+          {
+            "subject": "s004",
+            "eer": 0.34,
+            "eerThreshold": 0.271,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.144,
+            "productionFRR": 0.81
+          },
+          {
+            "subject": "s005",
+            "eer": 0.14,
+            "eerThreshold": 0.281,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.04,
+            "productionFRR": 0.83
+          },
+          {
+            "subject": "s007",
+            "eer": 0.5845,
+            "eerThreshold": 0.1831,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.22,
+            "productionFRR": 0.99
+          },
+          {
+            "subject": "s008",
+            "eer": 0.2155,
+            "eerThreshold": 0.2733,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.08,
+            "productionFRR": 0.85
+          },
+          {
+            "subject": "s010",
+            "eer": 0.0445,
+            "eerThreshold": 0.4962,
+            "calibratedThreshold": 0.4321,
+            "productionFAR": 0.068,
+            "productionFRR": 0.02
+          },
+          {
+            "subject": "s011",
+            "eer": 0.431,
+            "eerThreshold": 0.1679,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.06,
+            "productionFRR": 1
+          },
+          {
+            "subject": "s012",
+            "eer": 0.2155,
+            "eerThreshold": 0.1023,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0,
+            "productionFRR": 1
+          },
+          {
+            "subject": "s013",
+            "eer": 0.091,
+            "eerThreshold": 0.3918,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.08,
+            "productionFRR": 0.105
+          },
+          {
+            "subject": "s015",
+            "eer": 0.411,
+            "eerThreshold": 0.2491,
+            "calibratedThreshold": 0.5312,
+            "productionFAR": 0.052,
+            "productionFRR": 0.99
+          },
+          {
+            "subject": "s016",
+            "eer": 0.1445,
+            "eerThreshold": 0.3108,
+            "calibratedThreshold": 0.4972,
+            "productionFAR": 0.008,
+            "productionFRR": 0.8
+          },
+          {
+            "subject": "s017",
+            "eer": 0.031,
+            "eerThreshold": 0.4325,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.036,
+            "productionFRR": 0.015
+          },
+          {
+            "subject": "s018",
+            "eer": 0.529,
+            "eerThreshold": 0.3002,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.36,
+            "productionFRR": 0.79
+          },
+          {
+            "subject": "s019",
+            "eer": 0.191,
+            "eerThreshold": 0.2644,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.048,
+            "productionFRR": 0.765
+          },
+          {
+            "subject": "s020",
+            "eer": 0.22,
+            "eerThreshold": 0.2573,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.052,
+            "productionFRR": 0.67
+          },
+          {
+            "subject": "s021",
+            "eer": 0.24,
+            "eerThreshold": 0.3169,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.084,
+            "productionFRR": 0.505
+          },
+          {
+            "subject": "s022",
+            "eer": 0.1245,
+            "eerThreshold": 0.3252,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.06,
+            "productionFRR": 0.385
+          },
+          {
+            "subject": "s024",
+            "eer": 0.071,
+            "eerThreshold": 0.4298,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.096,
+            "productionFRR": 0.05
+          },
+          {
+            "subject": "s025",
+            "eer": 0.26,
+            "eerThreshold": 0.4375,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.32,
+            "productionFRR": 0.15
+          },
+          {
+            "subject": "s026",
+            "eer": 0.1045,
+            "eerThreshold": 0.4075,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.12,
+            "productionFRR": 0.105
+          },
+          {
+            "subject": "s027",
+            "eer": 0.189,
+            "eerThreshold": 0.2936,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.036,
+            "productionFRR": 0.53
+          },
+          {
+            "subject": "s028",
+            "eer": 0.1755,
+            "eerThreshold": 0.2997,
+            "calibratedThreshold": 0.4687,
+            "productionFAR": 0.02,
+            "productionFRR": 0.74
+          },
+          {
+            "subject": "s029",
+            "eer": 0.1755,
+            "eerThreshold": 0.3514,
+            "calibratedThreshold": 0.5071,
+            "productionFAR": 0.056,
+            "productionFRR": 0.655
+          },
+          {
+            "subject": "s030",
+            "eer": 0.6355,
+            "eerThreshold": 0.1328,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.204,
+            "productionFRR": 0.99
+          },
+          {
+            "subject": "s031",
+            "eer": 0.52,
+            "eerThreshold": 0.1734,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.072,
+            "productionFRR": 0.985
+          },
+          {
+            "subject": "s032",
+            "eer": 0.4645,
+            "eerThreshold": 0.2548,
+            "calibratedThreshold": 0.4487,
+            "productionFAR": 0.168,
+            "productionFRR": 0.88
+          },
+          {
+            "subject": "s033",
+            "eer": 0.1045,
+            "eerThreshold": 0.1678,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0,
+            "productionFRR": 0.89
+          },
+          {
+            "subject": "s034",
+            "eer": 0.4755,
+            "eerThreshold": 0.2116,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.212,
+            "productionFRR": 0.96
+          },
+          {
+            "subject": "s035",
+            "eer": 0.3755,
+            "eerThreshold": 0.2761,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.208,
+            "productionFRR": 0.66
+          },
+          {
+            "subject": "s036",
+            "eer": 0.02,
+            "eerThreshold": 0.3954,
+            "calibratedThreshold": 0.4374,
+            "productionFAR": 0.012,
+            "productionFRR": 0.055
+          },
+          {
+            "subject": "s037",
+            "eer": 0.2245,
+            "eerThreshold": 0.3437,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.124,
+            "productionFRR": 0.405
+          },
+          {
+            "subject": "s038",
+            "eer": 0.3355,
+            "eerThreshold": 0.3452,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.232,
+            "productionFRR": 0.515
+          },
+          {
+            "subject": "s039",
+            "eer": 0.2155,
+            "eerThreshold": 0.3666,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.144,
+            "productionFRR": 0.305
+          },
+          {
+            "subject": "s040",
+            "eer": 0.251,
+            "eerThreshold": 0.3114,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.084,
+            "productionFRR": 0.465
+          },
+          {
+            "subject": "s041",
+            "eer": 0.369,
+            "eerThreshold": 0.1725,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.028,
+            "productionFRR": 0.87
+          },
+          {
+            "subject": "s042",
+            "eer": 0.429,
+            "eerThreshold": 0.2093,
+            "calibratedThreshold": 0.403,
+            "productionFAR": 0.116,
+            "productionFRR": 0.98
+          },
+          {
+            "subject": "s043",
+            "eer": 0.1645,
+            "eerThreshold": 0.2915,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.04,
+            "productionFRR": 0.54
+          },
+          {
+            "subject": "s044",
+            "eer": 0.2355,
+            "eerThreshold": 0.3534,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.16,
+            "productionFRR": 0.405
+          },
+          {
+            "subject": "s046",
+            "eer": 0.5645,
+            "eerThreshold": 0.3551,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.5,
+            "productionFRR": 0.68
+          },
+          {
+            "subject": "s047",
+            "eer": 0.449,
+            "eerThreshold": 0.231,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.116,
+            "productionFRR": 0.965
+          },
+          {
+            "subject": "s048",
+            "eer": 0.351,
+            "eerThreshold": 0.3769,
+            "calibratedThreshold": 0.5178,
+            "productionFAR": 0.176,
+            "productionFRR": 0.925
+          },
+          {
+            "subject": "s049",
+            "eer": 0.1,
+            "eerThreshold": 0.3338,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.048,
+            "productionFRR": 0.265
+          },
+          {
+            "subject": "s050",
+            "eer": 0.28,
+            "eerThreshold": 0.3525,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.204,
+            "productionFRR": 0.455
+          },
+          {
+            "subject": "s051",
+            "eer": 0.3045,
+            "eerThreshold": 0.2533,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.132,
+            "productionFRR": 0.75
+          },
+          {
+            "subject": "s052",
+            "eer": 0.0555,
+            "eerThreshold": 0.2529,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0,
+            "productionFRR": 0.395
+          },
+          {
+            "subject": "s053",
+            "eer": 0.0445,
+            "eerThreshold": 0.2154,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0,
+            "productionFRR": 0.415
+          },
+          {
+            "subject": "s054",
+            "eer": 0.451,
+            "eerThreshold": 0.379,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.42,
+            "productionFRR": 0.545
+          },
+          {
+            "subject": "s055",
+            "eer": 0.1045,
+            "eerThreshold": 0.2946,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.028,
+            "productionFRR": 0.385
+          },
+          {
+            "subject": "s056",
+            "eer": 0.1445,
+            "eerThreshold": 0.3417,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.104,
+            "productionFRR": 0.395
+          },
+          {
+            "subject": "s057",
+            "eer": 0.231,
+            "eerThreshold": 0.2391,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.084,
+            "productionFRR": 0.685
+          }
+        ]
+      },
+      "enroll10Last": {
+        "meanEER": 0.0602,
+        "sdEER": 0.0453,
+        "medianEER": 0.0445,
+        "minEER": 0,
+        "maxEER": 0.189,
+        "pooledEER": 0.078,
+        "pooledEERThreshold": 0.2491,
+        "meanEERThreshold": 0.2649,
+        "production": {
+          "rule": "max(0.85, min(0.97, median(LOO) - 3*MAD(LOO)))",
+          "meanCalibratedRaw": 0.4398,
+          "meanThreshold": 0.432,
+          "usersAtFloor": 0,
+          "meanFAR": 0.0125,
+          "meanFRR": 0.2899
+        },
+        "floorSweep": [
+          {
+            "floor": 0.5,
+            "meanFAR": 0.0037,
+            "meanFRR": 0.4487
+          },
+          {
+            "floor": 0.6,
+            "meanFAR": 0.0012,
+            "meanFRR": 0.5803
+          },
+          {
+            "floor": 0.7,
+            "meanFAR": 0.0003,
+            "meanFRR": 0.7399
+          },
+          {
+            "floor": 0.75,
+            "meanFAR": 0.0001,
+            "meanFRR": 0.823
+          },
+          {
+            "floor": 0.8,
+            "meanFAR": 0,
+            "meanFRR": 0.9018
+          },
+          {
+            "floor": 0.85,
+            "meanFAR": 0,
+            "meanFRR": 0.96
+          },
+          {
+            "floor": 0.9,
+            "meanFAR": 0,
+            "meanFRR": 0.9925
+          }
+        ],
+        "fixedThreshold": [
+          {
+            "threshold": 0.5,
+            "meanFAR": 0.0045,
+            "meanFRR": 0.3935
+          },
+          {
+            "threshold": 0.6,
+            "meanFAR": 0.0012,
+            "meanFRR": 0.5599
+          },
+          {
+            "threshold": 0.7,
+            "meanFAR": 0.0003,
+            "meanFRR": 0.7344
+          },
+          {
+            "threshold": 0.75,
+            "meanFAR": 0.0001,
+            "meanFRR": 0.8217
+          },
+          {
+            "threshold": 0.8,
+            "meanFAR": 0,
+            "meanFRR": 0.9018
+          },
+          {
+            "threshold": 0.85,
+            "meanFAR": 0,
+            "meanFRR": 0.96
+          },
+          {
+            "threshold": 0.9,
+            "meanFAR": 0,
+            "meanFRR": 0.9925
+          },
+          {
+            "threshold": 0.95,
+            "meanFAR": 0,
+            "meanFRR": 0.9996
+          }
+        ],
+        "looPercentileRule": {
+          "rule": "10th percentile of leave-one-out enrollment scores, no floor",
+          "meanThreshold": 0.3457,
+          "meanFAR": 0.0792,
+          "meanFRR": 0.1911
+        },
+        "whatIf": {
+          "arithmeticMeanFusion": {
+            "meanEER": 0.0632,
+            "meanEERThreshold": 0.5889
+          },
+          "outlierCount196": {
+            "meanEER": 0.068,
+            "meanEERThreshold": 0.7888
+          }
+        },
+        "perUser": [
+          {
+            "subject": "s002",
+            "eer": 0.189,
+            "eerThreshold": 0.2051,
+            "calibratedThreshold": 0.6063,
+            "productionFAR": 0,
+            "productionFRR": 0.595
+          },
+          {
+            "subject": "s003",
+            "eer": 0.029,
+            "eerThreshold": 0.1145,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0,
+            "productionFRR": 0.625
+          },
+          {
+            "subject": "s004",
+            "eer": 0.049,
+            "eerThreshold": 0.3832,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.044,
+            "productionFRR": 0.05
+          },
+          {
+            "subject": "s005",
+            "eer": 0.0445,
+            "eerThreshold": 0.271,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0,
+            "productionFRR": 0.135
+          },
+          {
+            "subject": "s007",
+            "eer": 0.0355,
+            "eerThreshold": 0.2155,
+            "calibratedThreshold": 0.4602,
+            "productionFAR": 0,
+            "productionFRR": 0.45
+          },
+          {
+            "subject": "s008",
+            "eer": 0.0155,
+            "eerThreshold": 0.2649,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.004,
+            "productionFRR": 0.065
+          },
+          {
+            "subject": "s010",
+            "eer": 0.0155,
+            "eerThreshold": 0.376,
+            "calibratedThreshold": 0.4651,
+            "productionFAR": 0,
+            "productionFRR": 0.035
+          },
+          {
+            "subject": "s011",
+            "eer": 0.0355,
+            "eerThreshold": 0.1691,
+            "calibratedThreshold": 0.4672,
+            "productionFAR": 0,
+            "productionFRR": 0.575
+          },
+          {
+            "subject": "s012",
+            "eer": 0.0045,
+            "eerThreshold": 0.1268,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0,
+            "productionFRR": 0.435
+          },
+          {
+            "subject": "s013",
+            "eer": 0.009,
+            "eerThreshold": 0.2606,
+            "calibratedThreshold": 0.6696,
+            "productionFAR": 0,
+            "productionFRR": 0.44
+          },
+          {
+            "subject": "s015",
+            "eer": 0.089,
+            "eerThreshold": 0.3921,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.076,
+            "productionFRR": 0.11
+          },
+          {
+            "subject": "s016",
+            "eer": 0.1245,
+            "eerThreshold": 0.3729,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.076,
+            "productionFRR": 0.19
+          },
+          {
+            "subject": "s017",
+            "eer": 0.02,
+            "eerThreshold": 0.4108,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.02,
+            "productionFRR": 0.02
+          },
+          {
+            "subject": "s018",
+            "eer": 0.0445,
+            "eerThreshold": 0.2438,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.004,
+            "productionFRR": 0.22
+          },
+          {
+            "subject": "s019",
+            "eer": 0.029,
+            "eerThreshold": 0.2477,
+            "calibratedThreshold": 0.4567,
+            "productionFAR": 0,
+            "productionFRR": 0.115
+          },
+          {
+            "subject": "s020",
+            "eer": 0.0755,
+            "eerThreshold": 0.1409,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0,
+            "productionFRR": 0.53
+          },
+          {
+            "subject": "s021",
+            "eer": 0.0555,
+            "eerThreshold": 0.3031,
+            "calibratedThreshold": 0.5413,
+            "productionFAR": 0,
+            "productionFRR": 0.36
+          },
+          {
+            "subject": "s022",
+            "eer": 0.029,
+            "eerThreshold": 0.1611,
+            "calibratedThreshold": 0.417,
+            "productionFAR": 0,
+            "productionFRR": 0.42
+          },
+          {
+            "subject": "s024",
+            "eer": 0.08,
+            "eerThreshold": 0.3326,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.044,
+            "productionFRR": 0.12
+          },
+          {
+            "subject": "s025",
+            "eer": 0.0845,
+            "eerThreshold": 0.4372,
+            "calibratedThreshold": 0.4478,
+            "productionFAR": 0.08,
+            "productionFRR": 0.09
+          },
+          {
+            "subject": "s026",
+            "eer": 0.0755,
+            "eerThreshold": 0.2797,
+            "calibratedThreshold": 0.5462,
+            "productionFAR": 0,
+            "productionFRR": 0.275
+          },
+          {
+            "subject": "s027",
+            "eer": 0.0645,
+            "eerThreshold": 0.2579,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0,
+            "productionFRR": 0.16
+          },
+          {
+            "subject": "s028",
+            "eer": 0.0355,
+            "eerThreshold": 0.3472,
+            "calibratedThreshold": 0.4405,
+            "productionFAR": 0.02,
+            "productionFRR": 0.135
+          },
+          {
+            "subject": "s029",
+            "eer": 0.0355,
+            "eerThreshold": 0.3612,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.024,
+            "productionFRR": 0.09
+          },
+          {
+            "subject": "s030",
+            "eer": 0.109,
+            "eerThreshold": 0.2261,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.008,
+            "productionFRR": 0.36
+          },
+          {
+            "subject": "s031",
+            "eer": 0.131,
+            "eerThreshold": 0.2546,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.008,
+            "productionFRR": 0.375
+          },
+          {
+            "subject": "s032",
+            "eer": 0.0955,
+            "eerThreshold": 0.2303,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0,
+            "productionFRR": 0.43
+          },
+          {
+            "subject": "s033",
+            "eer": 0.1,
+            "eerThreshold": 0.1917,
+            "calibratedThreshold": 0.4211,
+            "productionFAR": 0.004,
+            "productionFRR": 0.77
+          },
+          {
+            "subject": "s034",
+            "eer": 0.031,
+            "eerThreshold": 0.2121,
+            "calibratedThreshold": 0.5565,
+            "productionFAR": 0,
+            "productionFRR": 0.395
+          },
+          {
+            "subject": "s035",
+            "eer": 0.1445,
+            "eerThreshold": 0.2465,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.044,
+            "productionFRR": 0.45
+          },
+          {
+            "subject": "s036",
+            "eer": 0.0155,
+            "eerThreshold": 0.2765,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.004,
+            "productionFRR": 0.04
+          },
+          {
+            "subject": "s037",
+            "eer": 0.0555,
+            "eerThreshold": 0.2254,
+            "calibratedThreshold": 0.4701,
+            "productionFAR": 0,
+            "productionFRR": 0.535
+          },
+          {
+            "subject": "s038",
+            "eer": 0.0845,
+            "eerThreshold": 0.2063,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0,
+            "productionFRR": 0.25
+          },
+          {
+            "subject": "s039",
+            "eer": 0.051,
+            "eerThreshold": 0.3075,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.004,
+            "productionFRR": 0.1
+          },
+          {
+            "subject": "s040",
+            "eer": 0.1245,
+            "eerThreshold": 0.1085,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0,
+            "productionFRR": 0.91
+          },
+          {
+            "subject": "s041",
+            "eer": 0.06,
+            "eerThreshold": 0.1611,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0,
+            "productionFRR": 0.585
+          },
+          {
+            "subject": "s042",
+            "eer": 0.0155,
+            "eerThreshold": 0.3308,
+            "calibratedThreshold": 0.4181,
+            "productionFAR": 0,
+            "productionFRR": 0.075
+          },
+          {
+            "subject": "s043",
+            "eer": 0.029,
+            "eerThreshold": 0.2673,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0,
+            "productionFRR": 0.13
+          },
+          {
+            "subject": "s044",
+            "eer": 0.1155,
+            "eerThreshold": 0.2657,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.032,
+            "productionFRR": 0.26
+          },
+          {
+            "subject": "s046",
+            "eer": 0.1155,
+            "eerThreshold": 0.298,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.02,
+            "productionFRR": 0.225
+          },
+          {
+            "subject": "s047",
+            "eer": 0.169,
+            "eerThreshold": 0.2985,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.032,
+            "productionFRR": 0.43
+          },
+          {
+            "subject": "s048",
+            "eer": 0.02,
+            "eerThreshold": 0.3381,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.016,
+            "productionFRR": 0.045
+          },
+          {
+            "subject": "s049",
+            "eer": 0.1,
+            "eerThreshold": 0.2141,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.004,
+            "productionFRR": 0.275
+          },
+          {
+            "subject": "s050",
+            "eer": 0.04,
+            "eerThreshold": 0.3041,
+            "calibratedThreshold": 0.4215,
+            "productionFAR": 0.008,
+            "productionFRR": 0.12
+          },
+          {
+            "subject": "s051",
+            "eer": 0.029,
+            "eerThreshold": 0.2829,
+            "calibratedThreshold": 0.4535,
+            "productionFAR": 0,
+            "productionFRR": 0.295
+          },
+          {
+            "subject": "s052",
+            "eer": 0.0045,
+            "eerThreshold": 0.1604,
+            "calibratedThreshold": 0.5099,
+            "productionFAR": 0,
+            "productionFRR": 0.47
+          },
+          {
+            "subject": "s053",
+            "eer": 0.0155,
+            "eerThreshold": 0.2761,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.004,
+            "productionFRR": 0.1
+          },
+          {
+            "subject": "s054",
+            "eer": 0.0245,
+            "eerThreshold": 0.2368,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0,
+            "productionFRR": 0.4
+          },
+          {
+            "subject": "s055",
+            "eer": 0,
+            "eerThreshold": 0.2738,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0,
+            "productionFRR": 0.02
+          },
+          {
+            "subject": "s056",
+            "eer": 0.091,
+            "eerThreshold": 0.3266,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.052,
+            "productionFRR": 0.255
+          },
+          {
+            "subject": "s057",
+            "eer": 0.029,
+            "eerThreshold": 0.3168,
+            "calibratedThreshold": 0.4629,
+            "productionFAR": 0.004,
+            "productionFRR": 0.245
+          }
+        ]
+      },
+      "enroll150Interleaved": {
+        "meanEER": 0.0898,
+        "sdEER": 0.0574,
+        "medianEER": 0.08,
+        "minEER": 0.002,
+        "maxEER": 0.26,
+        "pooledEER": 0.0995,
+        "pooledEERThreshold": 0.3667,
+        "meanEERThreshold": 0.3636,
+        "production": {
+          "rule": "max(0.85, min(0.97, median(LOO) - 3*MAD(LOO)))",
+          "meanCalibratedRaw": 0.3325,
+          "meanThreshold": 0.4151,
+          "usersAtFloor": 0,
+          "meanFAR": 0.073,
+          "meanFRR": 0.1282
+        },
+        "floorSweep": [
+          {
+            "floor": 0.5,
+            "meanFAR": 0.0321,
+            "meanFRR": 0.2145
+          },
+          {
+            "floor": 0.6,
+            "meanFAR": 0.0104,
+            "meanFRR": 0.3392
+          },
+          {
+            "floor": 0.7,
+            "meanFAR": 0.0022,
+            "meanFRR": 0.5051
+          },
+          {
+            "floor": 0.75,
+            "meanFAR": 0.0005,
+            "meanFRR": 0.6055
+          },
+          {
+            "floor": 0.8,
+            "meanFAR": 0.0001,
+            "meanFRR": 0.7306
+          },
+          {
+            "floor": 0.85,
+            "meanFAR": 0,
+            "meanFRR": 0.8514
+          },
+          {
+            "floor": 0.9,
+            "meanFAR": 0,
+            "meanFRR": 0.9561
+          }
+        ],
+        "fixedThreshold": [
+          {
+            "threshold": 0.5,
+            "meanFAR": 0.033,
+            "meanFRR": 0.2086
+          },
+          {
+            "threshold": 0.6,
+            "meanFAR": 0.0104,
+            "meanFRR": 0.3388
+          },
+          {
+            "threshold": 0.7,
+            "meanFAR": 0.0022,
+            "meanFRR": 0.5051
+          },
+          {
+            "threshold": 0.75,
+            "meanFAR": 0.0005,
+            "meanFRR": 0.6055
+          },
+          {
+            "threshold": 0.8,
+            "meanFAR": 0.0001,
+            "meanFRR": 0.7306
+          },
+          {
+            "threshold": 0.85,
+            "meanFAR": 0,
+            "meanFRR": 0.8514
+          },
+          {
+            "threshold": 0.9,
+            "meanFAR": 0,
+            "meanFRR": 0.9561
+          },
+          {
+            "threshold": 0.95,
+            "meanFAR": 0,
+            "meanFRR": 0.9961
+          }
+        ],
+        "looPercentileRule": {
+          "rule": "10th percentile of leave-one-out enrollment scores, no floor",
+          "meanThreshold": 0.3605,
+          "meanFAR": 0.1249,
+          "meanFRR": 0.0816
+        },
+        "whatIf": {
+          "arithmeticMeanFusion": {
+            "meanEER": 0.0744,
+            "meanEERThreshold": 0.6569
+          },
+          "outlierCount196": {
+            "meanEER": 0.0965,
+            "meanEERThreshold": 0.8374
+          }
+        },
+        "perUser": [
+          {
+            "subject": "s002",
+            "eer": 0.082,
+            "eerThreshold": 0.4776,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.164,
+            "productionFRR": 0.08
+          },
+          {
+            "subject": "s003",
+            "eer": 0.056,
+            "eerThreshold": 0.2995,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.008,
+            "productionFRR": 0.08
+          },
+          {
+            "subject": "s004",
+            "eer": 0.06,
+            "eerThreshold": 0.4457,
+            "calibratedThreshold": 0.4215,
+            "productionFAR": 0.076,
+            "productionFRR": 0.06
+          },
+          {
+            "subject": "s005",
+            "eer": 0.06,
+            "eerThreshold": 0.2963,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.008,
+            "productionFRR": 0.14
+          },
+          {
+            "subject": "s007",
+            "eer": 0.08,
+            "eerThreshold": 0.3714,
+            "calibratedThreshold": 0.4011,
+            "productionFAR": 0.064,
+            "productionFRR": 0.1
+          },
+          {
+            "subject": "s008",
+            "eer": 0.064,
+            "eerThreshold": 0.3232,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.032,
+            "productionFRR": 0.1
+          },
+          {
+            "subject": "s010",
+            "eer": 0.038,
+            "eerThreshold": 0.36,
+            "calibratedThreshold": 0.4339,
+            "productionFAR": 0.012,
+            "productionFRR": 0.08
+          },
+          {
+            "subject": "s011",
+            "eer": 0.04,
+            "eerThreshold": 0.3107,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.016,
+            "productionFRR": 0.16
+          },
+          {
+            "subject": "s012",
+            "eer": 0.04,
+            "eerThreshold": 0.217,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.008,
+            "productionFRR": 0.16
+          },
+          {
+            "subject": "s013",
+            "eer": 0.056,
+            "eerThreshold": 0.3028,
+            "calibratedThreshold": 0.4431,
+            "productionFAR": 0.024,
+            "productionFRR": 0.16
+          },
+          {
+            "subject": "s015",
+            "eer": 0.082,
+            "eerThreshold": 0.3998,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.084,
+            "productionFRR": 0.1
+          },
+          {
+            "subject": "s016",
+            "eer": 0.08,
+            "eerThreshold": 0.4367,
+            "calibratedThreshold": 0.4337,
+            "productionFAR": 0.08,
+            "productionFRR": 0.08
+          },
+          {
+            "subject": "s017",
+            "eer": 0.02,
+            "eerThreshold": 0.4984,
+            "calibratedThreshold": 0.5191,
+            "productionFAR": 0.016,
+            "productionFRR": 0.06
+          },
+          {
+            "subject": "s018",
+            "eer": 0.08,
+            "eerThreshold": 0.2651,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.024,
+            "productionFRR": 0.24
+          },
+          {
+            "subject": "s019",
+            "eer": 0.08,
+            "eerThreshold": 0.2898,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.008,
+            "productionFRR": 0.12
+          },
+          {
+            "subject": "s020",
+            "eer": 0.16,
+            "eerThreshold": 0.2267,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.016,
+            "productionFRR": 0.3
+          },
+          {
+            "subject": "s021",
+            "eer": 0.06,
+            "eerThreshold": 0.4113,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.064,
+            "productionFRR": 0.04
+          },
+          {
+            "subject": "s022",
+            "eer": 0.002,
+            "eerThreshold": 0.3591,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.004,
+            "productionFRR": 0.02
+          },
+          {
+            "subject": "s024",
+            "eer": 0.1,
+            "eerThreshold": 0.3612,
+            "calibratedThreshold": 0.4044,
+            "productionFAR": 0.06,
+            "productionFRR": 0.1
+          },
+          {
+            "subject": "s025",
+            "eer": 0.118,
+            "eerThreshold": 0.4474,
+            "calibratedThreshold": 0.4178,
+            "productionFAR": 0.148,
+            "productionFRR": 0.08
+          },
+          {
+            "subject": "s026",
+            "eer": 0.08,
+            "eerThreshold": 0.3884,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.068,
+            "productionFRR": 0.08
+          },
+          {
+            "subject": "s027",
+            "eer": 0.08,
+            "eerThreshold": 0.3771,
+            "calibratedThreshold": 0.4191,
+            "productionFAR": 0.048,
+            "productionFRR": 0.12
+          },
+          {
+            "subject": "s028",
+            "eer": 0.06,
+            "eerThreshold": 0.3582,
+            "calibratedThreshold": 0.4174,
+            "productionFAR": 0.04,
+            "productionFRR": 0.08
+          },
+          {
+            "subject": "s029",
+            "eer": 0.038,
+            "eerThreshold": 0.4038,
+            "calibratedThreshold": 0.4539,
+            "productionFAR": 0.016,
+            "productionFRR": 0.06
+          },
+          {
+            "subject": "s030",
+            "eer": 0.2,
+            "eerThreshold": 0.3503,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.152,
+            "productionFRR": 0.24
+          },
+          {
+            "subject": "s031",
+            "eer": 0.244,
+            "eerThreshold": 0.4783,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.36,
+            "productionFRR": 0.16
+          },
+          {
+            "subject": "s032",
+            "eer": 0.12,
+            "eerThreshold": 0.3706,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.1,
+            "productionFRR": 0.16
+          },
+          {
+            "subject": "s033",
+            "eer": 0.062,
+            "eerThreshold": 0.4184,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.076,
+            "productionFRR": 0.06
+          },
+          {
+            "subject": "s034",
+            "eer": 0.1,
+            "eerThreshold": 0.3466,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.056,
+            "productionFRR": 0.1
+          },
+          {
+            "subject": "s035",
+            "eer": 0.178,
+            "eerThreshold": 0.3045,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.088,
+            "productionFRR": 0.38
+          },
+          {
+            "subject": "s036",
+            "eer": 0.04,
+            "eerThreshold": 0.3845,
+            "calibratedThreshold": 0.615,
+            "productionFAR": 0,
+            "productionFRR": 0.12
+          },
+          {
+            "subject": "s037",
+            "eer": 0.1,
+            "eerThreshold": 0.3192,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.04,
+            "productionFRR": 0.18
+          },
+          {
+            "subject": "s038",
+            "eer": 0.2,
+            "eerThreshold": 0.414,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.216,
+            "productionFRR": 0.2
+          },
+          {
+            "subject": "s039",
+            "eer": 0.08,
+            "eerThreshold": 0.3744,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.052,
+            "productionFRR": 0.08
+          },
+          {
+            "subject": "s040",
+            "eer": 0.16,
+            "eerThreshold": 0.394,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.156,
+            "productionFRR": 0.18
+          },
+          {
+            "subject": "s041",
+            "eer": 0.084,
+            "eerThreshold": 0.2919,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.016,
+            "productionFRR": 0.32
+          },
+          {
+            "subject": "s042",
+            "eer": 0.08,
+            "eerThreshold": 0.3762,
+            "calibratedThreshold": 0.4368,
+            "productionFAR": 0.04,
+            "productionFRR": 0.08
+          },
+          {
+            "subject": "s043",
+            "eer": 0.04,
+            "eerThreshold": 0.352,
+            "calibratedThreshold": 0.4677,
+            "productionFAR": 0.004,
+            "productionFRR": 0.2
+          },
+          {
+            "subject": "s044",
+            "eer": 0.16,
+            "eerThreshold": 0.3955,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.14,
+            "productionFRR": 0.16
+          },
+          {
+            "subject": "s046",
+            "eer": 0.2,
+            "eerThreshold": 0.4322,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.292,
+            "productionFRR": 0.14
+          },
+          {
+            "subject": "s047",
+            "eer": 0.26,
+            "eerThreshold": 0.476,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.356,
+            "productionFRR": 0.16
+          },
+          {
+            "subject": "s048",
+            "eer": 0.06,
+            "eerThreshold": 0.4104,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.072,
+            "productionFRR": 0.06
+          },
+          {
+            "subject": "s049",
+            "eer": 0.098,
+            "eerThreshold": 0.3999,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.092,
+            "productionFRR": 0.1
+          },
+          {
+            "subject": "s050",
+            "eer": 0.06,
+            "eerThreshold": 0.4005,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.06,
+            "productionFRR": 0.06
+          },
+          {
+            "subject": "s051",
+            "eer": 0.098,
+            "eerThreshold": 0.4053,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.096,
+            "productionFRR": 0.08
+          },
+          {
+            "subject": "s052",
+            "eer": 0.02,
+            "eerThreshold": 0.2601,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0,
+            "productionFRR": 0.06
+          },
+          {
+            "subject": "s053",
+            "eer": 0.04,
+            "eerThreshold": 0.2353,
+            "calibratedThreshold": 0.4176,
+            "productionFAR": 0,
+            "productionFRR": 0.16
+          },
+          {
+            "subject": "s054",
+            "eer": 0.098,
+            "eerThreshold": 0.2911,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.028,
+            "productionFRR": 0.18
+          },
+          {
+            "subject": "s055",
+            "eer": 0.02,
+            "eerThreshold": 0.244,
+            "calibratedThreshold": 0.4704,
+            "productionFAR": 0,
+            "productionFRR": 0.12
+          },
+          {
+            "subject": "s056",
+            "eer": 0.06,
+            "eerThreshold": 0.4254,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.064,
+            "productionFRR": 0.06
+          },
+          {
+            "subject": "s057",
+            "eer": 0.1,
+            "eerThreshold": 0.3643,
+            "calibratedThreshold": 0.4,
+            "productionFAR": 0.08,
+            "productionFRR": 0.14
+          }
+        ]
+      }
+    }
+  },
+  "baselines": {
+    "scaledManhattan_enroll200": {
+      "meanEER": 0.0961,
+      "sdEER": 0.0694,
+      "medianEER": 0.08,
+      "pooledEER": 0.1138,
+      "perUser": [
+        {
+          "subject": "s002",
+          "eer": 0.24
+        },
+        {
+          "subject": "s003",
+          "eer": 0.14
+        },
+        {
+          "subject": "s004",
+          "eer": 0.08
+        },
+        {
+          "subject": "s005",
+          "eer": 0.0445
+        },
+        {
+          "subject": "s007",
+          "eer": 0.111
+        },
+        {
+          "subject": "s008",
+          "eer": 0.0645
+        },
+        {
+          "subject": "s010",
+          "eer": 0.0245
+        },
+        {
+          "subject": "s011",
+          "eer": 0.071
+        },
+        {
+          "subject": "s012",
+          "eer": 0.02
+        },
+        {
+          "subject": "s013",
+          "eer": 0.071
+        },
+        {
+          "subject": "s015",
+          "eer": 0.109
+        },
+        {
+          "subject": "s016",
+          "eer": 0.18
+        },
+        {
+          "subject": "s017",
+          "eer": 0.029
+        },
+        {
+          "subject": "s018",
+          "eer": 0.1245
+        },
+        {
+          "subject": "s019",
+          "eer": 0.0445
+        },
+        {
+          "subject": "s020",
+          "eer": 0.14
+        },
+        {
+          "subject": "s021",
+          "eer": 0.1155
+        },
+        {
+          "subject": "s022",
+          "eer": 0.029
+        },
+        {
+          "subject": "s024",
+          "eer": 0.051
+        },
+        {
+          "subject": "s025",
+          "eer": 0.0755
+        },
+        {
+          "subject": "s026",
+          "eer": 0.0445
+        },
+        {
+          "subject": "s027",
+          "eer": 0.071
+        },
+        {
+          "subject": "s028",
+          "eer": 0.06
+        },
+        {
+          "subject": "s029",
+          "eer": 0.071
+        },
+        {
+          "subject": "s030",
+          "eer": 0.08
+        },
+        {
+          "subject": "s031",
+          "eer": 0.2755
+        },
+        {
+          "subject": "s032",
+          "eer": 0.271
+        },
+        {
+          "subject": "s033",
+          "eer": 0.109
+        },
+        {
+          "subject": "s034",
+          "eer": 0.1445
+        },
+        {
+          "subject": "s035",
+          "eer": 0.1955
+        },
+        {
+          "subject": "s036",
+          "eer": 0.009
+        },
+        {
+          "subject": "s037",
+          "eer": 0.111
+        },
+        {
+          "subject": "s038",
+          "eer": 0.091
+        },
+        {
+          "subject": "s039",
+          "eer": 0.0845
+        },
+        {
+          "subject": "s040",
+          "eer": 0.1555
+        },
+        {
+          "subject": "s041",
+          "eer": 0.1
+        },
+        {
+          "subject": "s042",
+          "eer": 0.0445
+        },
+        {
+          "subject": "s043",
+          "eer": 0.0155
+        },
+        {
+          "subject": "s044",
+          "eer": 0.0755
+        },
+        {
+          "subject": "s046",
+          "eer": 0.1445
+        },
+        {
+          "subject": "s047",
+          "eer": 0.3245
+        },
+        {
+          "subject": "s048",
+          "eer": 0.0645
+        },
+        {
+          "subject": "s049",
+          "eer": 0.0645
+        },
+        {
+          "subject": "s050",
+          "eer": 0.111
+        },
+        {
+          "subject": "s051",
+          "eer": 0.0955
+        },
+        {
+          "subject": "s052",
+          "eer": 0.0155
+        },
+        {
+          "subject": "s053",
+          "eer": 0.029
+        },
+        {
+          "subject": "s054",
+          "eer": 0.069
+        },
+        {
+          "subject": "s055",
+          "eer": 0.0155
+        },
+        {
+          "subject": "s056",
+          "eer": 0.08
+        },
+        {
+          "subject": "s057",
+          "eer": 0.1155
+        }
+      ]
+    },
+    "scaledManhattan_enroll10First": {
+      "meanEER": 0.2297,
+      "sdEER": 0.1389,
+      "medianEER": 0.2155,
+      "pooledEER": 0.2763,
+      "perUser": [
+        {
+          "subject": "s002",
+          "eer": 0.269
+        },
+        {
+          "subject": "s003",
+          "eer": 0.4045
+        },
+        {
+          "subject": "s004",
+          "eer": 0.3045
+        },
+        {
+          "subject": "s005",
+          "eer": 0.1
+        },
+        {
+          "subject": "s007",
+          "eer": 0.4845
+        },
+        {
+          "subject": "s008",
+          "eer": 0.1645
+        },
+        {
+          "subject": "s010",
+          "eer": 0.08
+        },
+        {
+          "subject": "s011",
+          "eer": 0.3555
+        },
+        {
+          "subject": "s012",
+          "eer": 0.109
+        },
+        {
+          "subject": "s013",
+          "eer": 0.131
+        },
+        {
+          "subject": "s015",
+          "eer": 0.2755
+        },
+        {
+          "subject": "s016",
+          "eer": 0.229
+        },
+        {
+          "subject": "s017",
+          "eer": 0.04
+        },
+        {
+          "subject": "s018",
+          "eer": 0.36
+        },
+        {
+          "subject": "s019",
+          "eer": 0.131
+        },
+        {
+          "subject": "s020",
+          "eer": 0.2445
+        },
+        {
+          "subject": "s021",
+          "eer": 0.2155
+        },
+        {
+          "subject": "s022",
+          "eer": 0.0645
+        },
+        {
+          "subject": "s024",
+          "eer": 0.069
+        },
+        {
+          "subject": "s025",
+          "eer": 0.1245
+        },
+        {
+          "subject": "s026",
+          "eer": 0.1155
+        },
+        {
+          "subject": "s027",
+          "eer": 0.089
+        },
+        {
+          "subject": "s028",
+          "eer": 0.111
+        },
+        {
+          "subject": "s029",
+          "eer": 0.1845
+        },
+        {
+          "subject": "s030",
+          "eer": 0.6155
+        },
+        {
+          "subject": "s031",
+          "eer": 0.371
+        },
+        {
+          "subject": "s032",
+          "eer": 0.4355
+        },
+        {
+          "subject": "s033",
+          "eer": 0.2
+        },
+        {
+          "subject": "s034",
+          "eer": 0.431
+        },
+        {
+          "subject": "s035",
+          "eer": 0.3755
+        },
+        {
+          "subject": "s036",
+          "eer": 0.0155
+        },
+        {
+          "subject": "s037",
+          "eer": 0.251
+        },
+        {
+          "subject": "s038",
+          "eer": 0.231
+        },
+        {
+          "subject": "s039",
+          "eer": 0.3
+        },
+        {
+          "subject": "s040",
+          "eer": 0.2155
+        },
+        {
+          "subject": "s041",
+          "eer": 0.371
+        },
+        {
+          "subject": "s042",
+          "eer": 0.2955
+        },
+        {
+          "subject": "s043",
+          "eer": 0.1155
+        },
+        {
+          "subject": "s044",
+          "eer": 0.1445
+        },
+        {
+          "subject": "s046",
+          "eer": 0.34
+        },
+        {
+          "subject": "s047",
+          "eer": 0.4755
+        },
+        {
+          "subject": "s048",
+          "eer": 0.1755
+        },
+        {
+          "subject": "s049",
+          "eer": 0.071
+        },
+        {
+          "subject": "s050",
+          "eer": 0.211
+        },
+        {
+          "subject": "s051",
+          "eer": 0.32
+        },
+        {
+          "subject": "s052",
+          "eer": 0.0445
+        },
+        {
+          "subject": "s053",
+          "eer": 0.0355
+        },
+        {
+          "subject": "s054",
+          "eer": 0.431
+        },
+        {
+          "subject": "s055",
+          "eer": 0.1555
+        },
+        {
+          "subject": "s056",
+          "eer": 0.1845
+        },
+        {
+          "subject": "s057",
+          "eer": 0.2445
+        }
+      ]
+    },
+    "scaledManhattan_enroll10Last": {
+      "meanEER": 0.0811,
+      "sdEER": 0.0447,
+      "medianEER": 0.0755,
+      "pooledEER": 0.1162,
+      "perUser": [
+        {
+          "subject": "s002",
+          "eer": 0.1555
+        },
+        {
+          "subject": "s003",
+          "eer": 0.08
+        },
+        {
+          "subject": "s004",
+          "eer": 0.071
+        },
+        {
+          "subject": "s005",
+          "eer": 0.0755
+        },
+        {
+          "subject": "s007",
+          "eer": 0.04
+        },
+        {
+          "subject": "s008",
+          "eer": 0.029
+        },
+        {
+          "subject": "s010",
+          "eer": 0.02
+        },
+        {
+          "subject": "s011",
+          "eer": 0.049
+        },
+        {
+          "subject": "s012",
+          "eer": 0.0355
+        },
+        {
+          "subject": "s013",
+          "eer": 0.051
+        },
+        {
+          "subject": "s015",
+          "eer": 0.0955
+        },
+        {
+          "subject": "s016",
+          "eer": 0.149
+        },
+        {
+          "subject": "s017",
+          "eer": 0.06
+        },
+        {
+          "subject": "s018",
+          "eer": 0.08
+        },
+        {
+          "subject": "s019",
+          "eer": 0.071
+        },
+        {
+          "subject": "s020",
+          "eer": 0.1045
+        },
+        {
+          "subject": "s021",
+          "eer": 0.091
+        },
+        {
+          "subject": "s022",
+          "eer": 0.049
+        },
+        {
+          "subject": "s024",
+          "eer": 0.0755
+        },
+        {
+          "subject": "s025",
+          "eer": 0.091
+        },
+        {
+          "subject": "s026",
+          "eer": 0.0955
+        },
+        {
+          "subject": "s027",
+          "eer": 0.0645
+        },
+        {
+          "subject": "s028",
+          "eer": 0.04
+        },
+        {
+          "subject": "s029",
+          "eer": 0.0645
+        },
+        {
+          "subject": "s030",
+          "eer": 0.111
+        },
+        {
+          "subject": "s031",
+          "eer": 0.16
+        },
+        {
+          "subject": "s032",
+          "eer": 0.089
+        },
+        {
+          "subject": "s033",
+          "eer": 0.0755
+        },
+        {
+          "subject": "s034",
+          "eer": 0.0955
+        },
+        {
+          "subject": "s035",
+          "eer": 0.1645
+        },
+        {
+          "subject": "s036",
+          "eer": 0.009
+        },
+        {
+          "subject": "s037",
+          "eer": 0.1045
+        },
+        {
+          "subject": "s038",
+          "eer": 0.0955
+        },
+        {
+          "subject": "s039",
+          "eer": 0.0845
+        },
+        {
+          "subject": "s040",
+          "eer": 0.209
+        },
+        {
+          "subject": "s041",
+          "eer": 0.1
+        },
+        {
+          "subject": "s042",
+          "eer": 0.04
+        },
+        {
+          "subject": "s043",
+          "eer": 0.029
+        },
+        {
+          "subject": "s044",
+          "eer": 0.1445
+        },
+        {
+          "subject": "s046",
+          "eer": 0.1
+        },
+        {
+          "subject": "s047",
+          "eer": 0.191
+        },
+        {
+          "subject": "s048",
+          "eer": 0.0555
+        },
+        {
+          "subject": "s049",
+          "eer": 0.131
+        },
+        {
+          "subject": "s050",
+          "eer": 0.089
+        },
+        {
+          "subject": "s051",
+          "eer": 0.0445
+        },
+        {
+          "subject": "s052",
+          "eer": 0.04
+        },
+        {
+          "subject": "s053",
+          "eer": 0.0245
+        },
+        {
+          "subject": "s054",
+          "eer": 0.0555
+        },
+        {
+          "subject": "s055",
+          "eer": 0.0155
+        },
+        {
+          "subject": "s056",
+          "eer": 0.0645
+        },
+        {
+          "subject": "s057",
+          "eer": 0.0755
+        }
+      ]
+    },
+    "scaledManhattan_enroll150Interleaved": {
+      "meanEER": 0.0921,
+      "sdEER": 0.0496,
+      "medianEER": 0.08,
+      "pooledEER": 0.1071,
+      "perUser": [
+        {
+          "subject": "s002",
+          "eer": 0.12
+        },
+        {
+          "subject": "s003",
+          "eer": 0.04
+        },
+        {
+          "subject": "s004",
+          "eer": 0.084
+        },
+        {
+          "subject": "s005",
+          "eer": 0.1
+        },
+        {
+          "subject": "s007",
+          "eer": 0.06
+        },
+        {
+          "subject": "s008",
+          "eer": 0.064
+        },
+        {
+          "subject": "s010",
+          "eer": 0.08
+        },
+        {
+          "subject": "s011",
+          "eer": 0.078
+        },
+        {
+          "subject": "s012",
+          "eer": 0.064
+        },
+        {
+          "subject": "s013",
+          "eer": 0.08
+        },
+        {
+          "subject": "s015",
+          "eer": 0.08
+        },
+        {
+          "subject": "s016",
+          "eer": 0.06
+        },
+        {
+          "subject": "s017",
+          "eer": 0.02
+        },
+        {
+          "subject": "s018",
+          "eer": 0.12
+        },
+        {
+          "subject": "s019",
+          "eer": 0.08
+        },
+        {
+          "subject": "s020",
+          "eer": 0.18
+        },
+        {
+          "subject": "s021",
+          "eer": 0.1
+        },
+        {
+          "subject": "s022",
+          "eer": 0.02
+        },
+        {
+          "subject": "s024",
+          "eer": 0.082
+        },
+        {
+          "subject": "s025",
+          "eer": 0.104
+        },
+        {
+          "subject": "s026",
+          "eer": 0.076
+        },
+        {
+          "subject": "s027",
+          "eer": 0.08
+        },
+        {
+          "subject": "s028",
+          "eer": 0.022
+        },
+        {
+          "subject": "s029",
+          "eer": 0.04
+        },
+        {
+          "subject": "s030",
+          "eer": 0.18
+        },
+        {
+          "subject": "s031",
+          "eer": 0.2
+        },
+        {
+          "subject": "s032",
+          "eer": 0.16
+        },
+        {
+          "subject": "s033",
+          "eer": 0.08
+        },
+        {
+          "subject": "s034",
+          "eer": 0.12
+        },
+        {
+          "subject": "s035",
+          "eer": 0.156
+        },
+        {
+          "subject": "s036",
+          "eer": 0.02
+        },
+        {
+          "subject": "s037",
+          "eer": 0.12
+        },
+        {
+          "subject": "s038",
+          "eer": 0.176
+        },
+        {
+          "subject": "s039",
+          "eer": 0.04
+        },
+        {
+          "subject": "s040",
+          "eer": 0.158
+        },
+        {
+          "subject": "s041",
+          "eer": 0.08
+        },
+        {
+          "subject": "s042",
+          "eer": 0.078
+        },
+        {
+          "subject": "s043",
+          "eer": 0.06
+        },
+        {
+          "subject": "s044",
+          "eer": 0.1
+        },
+        {
+          "subject": "s046",
+          "eer": 0.18
+        },
+        {
+          "subject": "s047",
+          "eer": 0.22
+        },
+        {
+          "subject": "s048",
+          "eer": 0.08
+        },
+        {
+          "subject": "s049",
+          "eer": 0.08
+        },
+        {
+          "subject": "s050",
+          "eer": 0.058
+        },
+        {
+          "subject": "s051",
+          "eer": 0.084
+        },
+        {
+          "subject": "s052",
+          "eer": 0.02
+        },
+        {
+          "subject": "s053",
+          "eer": 0.08
+        },
+        {
+          "subject": "s054",
+          "eer": 0.118
+        },
+        {
+          "subject": "s055",
+          "eer": 0.022
+        },
+        {
+          "subject": "s056",
+          "eer": 0.076
+        },
+        {
+          "subject": "s057",
+          "eer": 0.118
+        }
+      ]
+    },
+    "paperReported": {
+      "scaledManhattan": 0.096,
+      "nearestNeighborMahalanobis": 0.1,
+      "outlierCountZScore": 0.102
+    }
+  },
+  "runtimeMs": 139387
+}
