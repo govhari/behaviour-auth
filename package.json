@@ -1,6 +1,6 @@
 {
   "name": "bioprint",
-  "version": "0.4.3",
+  "version": "0.5.0",
   "private": true,
   "type": "module",
   "engines": {
@@ -21,5 +21,26 @@
     "simulate": "node tools/simulate.js",
     "ablate:username": "node tools/ablate-cmu-username.js"
   },
-  "description": "Behavioral verification: ambient pre-login evidence, passive-first login, active step-up and post-login activity monitoring."
+  "description": "Behavioral verification: ambient pre-login evidence, passive-first login, active step-up and post-login activity monitoring.",
+  "exports": {
+    ".": "./server/index.js",
+    "./server": "./server/http.js",
+    "./core": "./server/core.js",
+    "./client": "./client/sdk.js",
+    "./client/bioprint.js": "./client/bioprint.js",
+    "./client/stepup.js": "./client/stepup.js",
+    "./client/sdk.js": "./client/sdk.js",
+    "./client/behavior.js": "./client/behavior.js",
+    "./client/ambient.js": "./client/ambient.js",
+    "./client/passive.js": "./client/passive.js",
+    "./client/continuous.js": "./client/continuous.js",
+    "./contracts": "./client/contracts.d.ts"
+  },
+  "files": [
+    "server",
+    "client",
+    "README.md",
+    "docs"
+  ],
+  "types": "./client/contracts.d.ts"
 }
