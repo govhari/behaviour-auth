@@ -1,6 +1,6 @@
 {
   "name": "bioprint",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "private": true,
   "type": "module",
   "engines": {
@@ -16,7 +16,9 @@
     "export:login": "node tools/research.js export-login",
     "audit": "node tools/research.js audit",
     "export:ambient": "node tools/research.js export-ambient",
-    "simulate": "node tools/simulate.js"
+    "benchmark": "node tools/benchmark-cmu.js",
+    "simulate": "node tools/simulate.js",
+    "ablate:username": "node tools/ablate-cmu-username.js"
   },
   "description": "Behavioral verification: ambient pre-login evidence, passive-first login, active step-up and post-login activity monitoring."
 }
