@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BioPrint · Log in with the way you type</title>
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<header class="top">
+  <a href="/" class="brand"><span class="mark" aria-hidden="true">◉</span>BioPrint</a>
+  <p class="tagline">Log in with the way you type and move.</p>
+  <div class="ambient" id="ambient-pill" role="status" data-state="starting"><i class="dot" aria-hidden="true"></i><span id="ambient-status">Starting behavioral observation…</span></div>
+</header>
+
+<main class="grid">
+  <div class="col col-input">
+
+    <section class="card" id="account-card">
+      <div class="card-head"><p class="stage"><b>1</b> Account</p><span id="account-badge" class="badge">CHECKING</span></div>
+      <label class="field"><span>Username</span>
+        <input id="user" value="alice" maxlength="64" autocomplete="off" autocapitalize="off" spellcheck="false" pattern="[a-zA-Z0-9_\-]+" list="account-suggestions">
+        <datalist id="account-suggestions"><option value="alice"><option value="judge"><option value="demo"></datalist>
+      </label>
+      <div class="account-row">
+        <label class="field grow"><span id="account-password-label">Choose a password</span>
+          <input id="account-password" type="password" minlength="8" maxlength="128" autocomplete="new-password" placeholder="at least 8 characters">
+        </label>
+        <button id="enroll" class="primary" type="button">Enroll</button>
+      </div>
+      <p id="account-status" class="status" role="status" aria-live="polite">Checking profile…</p>
+      <details class="advanced">
+        <summary>Advanced</summary>
+        <label class="field"><span>Input mode</span>
+          <select id="device-mode"><option value="">Automatic</option><option value="desktop-pointer">Keyboard + mouse / trackpad</option><option value="touch">Touch + on-screen keyboard</option><option value="pen">Pen + text input</option></select>
+        </label>
+        <div class="actions">
+          <button id="enroll-device" class="ghost small" type="button">Enroll this device</button>
+          <button id="motion" class="ghost small" type="button">Enable motion sensors</button>
+        </div>
+        <p class="hint">Enroll this device adds a new browser to an account that already has a profile. Recording label: <code id="study-session"></code></p>
+      </details>
+      <details class="advanced" id="manage-users">
+        <summary>Manage users</summary>
+        <ul id="user-list" class="user-list"></ul>
+        <div class="actions">
+          <button id="reset-all" class="ghost small danger" type="button">Clear everything</button>
+        </div>
+        <p class="hint">Delete removes the account, its behavioral profile and every recording. Clear everything empties the whole demo database.</p>
+      </details>
+    </section>
+
+    <section class="card" id="login-card">
+      <div class="card-head"><p class="stage"><b>2</b> <span id="login-stage-title">Log in</span></p><span id="login-badge" class="badge">READY</span></div>
+      <div id="wizard" class="wizard" hidden>
+        <div class="ring" id="ring" style="--p:0" aria-hidden="true"><span id="ring-text">0/8</span></div>
+        <div class="wizard-text">
+          <p id="wizard-phase" class="wizard-phase">Typing rounds</p>
+          <p id="wizard-instruction" class="wizard-instruction"></p>
+        </div>
+        <button id="pause" class="ghost small" type="button">Pause</button>
+      </div>
+      <p id="login-instruction" class="instruction">Type your username and password, then click the button. BioPrint checks the rhythm, not just the letters.</p>
+      <form id="login-form" autocomplete="on" novalidate>
+        <label class="field"><span>Username</span><input id="login-username" name="username" autocomplete="username" autocapitalize="off" spellcheck="false" maxlength="64" placeholder="alice"></label>
+        <label class="field"><span id="password-label">Password</span><input id="login-password" name="password" type="password" autocomplete="current-password" maxlength="128"></label>
+        <p id="password-hint" class="hint"></p>
+        <div class="runway" aria-hidden="true"></div>
+        <button id="login-submit" class="primary wide" type="submit">Log in</button>
+      </form>
+      <div id="stepup-mount" class="stepup-mount" hidden></div>
+      <p id="login-note" class="status" role="status" aria-live="polite"></p>
+      <div class="actions" id="login-actions" hidden><button id="again" class="ghost small" type="button">Log in again</button></div>
+      <div class="live" id="live">
+        <div class="live-head"><span>What BioPrint sees</span><span class="hint">timing and motion only · never the password itself</span></div>
+        <div class="live-row">
+          <div class="live-cell"><canvas id="live-keys" width="320" height="54"></canvas><span class="live-label"><i id="live-keys-count">0</i> keystroke intervals</span></div>
+          <div class="live-cell narrow"><canvas id="live-path" width="200" height="54"></canvas><span class="live-label"><i id="live-path-count">0</i> pointer samples</span></div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <div class="col col-output">
+    <section class="card verdict" id="verdict-card" data-state="idle">
+      <div class="card-head"><p class="stage"><b>3</b> Verdict</p><span id="verdict-source" class="badge">WAITING</span></div>
+      <div class="verdict-main">
+        <div class="verdict-state" aria-live="polite" aria-atomic="true">
+          <h2 id="verdict-state">WAITING</h2>
+          <p id="verdict-headline">Log in to see a decision.</p>
+        </div>
+        <div class="gauge" id="gauge">
+          <div class="gauge-num"><b id="conf-value">—</b><span id="conf-label">identity confidence</span></div>
+          <div class="track"><span class="fill" id="conf-fill"></span><span class="mark" id="conf-mark" hidden></span></div>
+          <p class="gauge-gate" id="conf-gate">threshold —</p>
+        </div>
+      </div>
+      <div class="meta">
+        <div><span>Decided in</span><b id="latency">—</b></div>
+        <div><span>Password</span><b id="password-state">—</b></div>
+        <div><span>Human rhythm</span><b id="human-value">—</b></div>
+        <div><span>Evidence</span><b id="quality-value">—</b></div>
+      </div>
+      <p id="verdict-summary" class="summary">Every decision is explained here: which signals matched, which did not, and anything that looked automated or replayed.</p>
+      <div id="fraud" class="fraud"></div>
+      <ul id="signals" class="signals"></ul>
+      <details class="raw"><summary>Inspect raw server evidence</summary><pre id="raw">{}</pre></details>
+    </section>
+  </div>
+</main>
+
+<footer class="foot">
+  <span class="foot-dot" id="monitor-dot" aria-hidden="true"></span>
+  <span id="monitor-status">Session monitoring starts after an accepted login.</span>
+  <button id="monitor-stop" class="link" type="button" hidden>Stop monitoring</button>
+</footer>
+<div id="toast" class="toast" role="status" aria-live="assertive" hidden></div>
+<script type="module" src="/app.js"></script>
+</body></html>
