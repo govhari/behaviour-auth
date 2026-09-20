@@ -3,3 +3,5 @@ data/*
 !data/benchmark/
 *.sqlite*
 .DS_Store
+.deck-build/
+.codex-finalizer/

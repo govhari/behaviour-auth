@@ -47,6 +47,9 @@ The counters are fixed. If the server finds two rounds that disagree it asks for
 
 URL hook for a rehearsed opening: `?auto=enroll&user=NAME`.
 
+## The shop
+
+Verdant has an account system of its own and a mount point where BioPrint is handed three callbacks. Browse first: the inspector in the corner counts ambient observation windows before anyone has signed in. Create an account and work through the enrollment wizard. Sign out and sign back in: a strong login is accepted outright, a thin one gets the active challenge in a modal, and either way the shop's own session is minted server-side. Keep shopping: monitoring runs over the whole page and can ask for a fresh login, never grant one. The account page has **Delete this account** and **Clear everything**. Details in [examples/shop/README.md](examples/shop/README.md).
 
 ## How it works
 
@@ -65,3 +68,46 @@ ambient (pre-login, optional) -> passive login -> active step-up (only if needed
 - **Devices.** Profiles are per device. A known device can be accepted on the passive stage alone; a new browser install always steps up.
 - **Also built.** Live dashboard with confidence and explanation; keyboard, mouse/trackpad, touch/pen drag and optional motion sensors in one profile; quarantined profile adaptation (four consistent high-confidence samples at least ten minutes apart, thresholds never lowered); post-login monitoring that can only shorten a session.
 
+## Mount it in your own application
+
+The server is a mountable handler; the browser side is an SDK.
+
+```js
+import { middleware } from 'bioprint/server';
+app.use(middleware(core, {basePath:'/bioprint', verifyPassword, authorizeEnrollment, onDecision}));
+```
+
+Three callbacks are the whole host surface: `verifyPassword` checks the credential (deleted before the behavioral verifier runs), `authorizeEnrollment` authorizes a browser to train one account, and `onDecision` is awaited before the response so the host mints or revokes its own session. See [docs/INTEGRATION.md](docs/INTEGRATION.md) and [docs/AMBIENT_SDK.md](docs/AMBIENT_SDK.md). `examples/shop` is the complete worked integration.
+
+## API
+
+All POSTs are JSON. Clients keep the HTTP-only `bioprint_session` cookie between challenge and submission; every challenge is single-use and bound to user, purpose, device and expiry.
+
+| Endpoint | Purpose |
+|---|---|
+| `POST /bioprint/enrollment/start` | `{userId}` + `X-Enrollment-Key`; starts or resumes enrollment, returns required round counts |
+| `POST /bioprint/enrollment/passive/challenge` · `/sample` | one natural-login training round |
+| `POST /bioprint/enroll/challenge` · `/sample` | one active training round |
+| `POST /bioprint/enrollment/complete` | saves both profiles |
+| `POST /bioprint/login/start` | `{userId, device}`; issues a fresh passive session |
+| `POST /bioprint/login/verify` | behavioral evidence + `password`; returns ACCEPT / STEP_UP / REJECT with explanation |
+| `POST /bioprint/login/challenge` · `/complete` | the active step-up, allowed once after STEP_UP |
+| `POST /bioprint/monitor/start` · `/challenge` · `/sample` · `/stop` | post-login monitoring windows |
+| `GET /bioprint/profile/:userId/status` | enrollment and version metadata, no biometric material |
+| `POST /bioprint/demo/register` · `/demo/users/delete` · `/demo/reset`, `GET /bioprint/demo/users` | demo server only: choose a password, delete a user, clear everything, list users. A host mounting the handler never gets these; it supplies `verifyPassword`, and without one every password fails closed |
+
+Environment: `PORT` (default 3000), `HOST` (default `127.0.0.1`), `BIOPRINT_DB` (default `data/bioprint.sqlite`), `BIOPRINT_EXPLAIN=0` to strip per-feature detail from explanations.
+
+## Privacy and storage
+
+Password keys, codes and values are rejected from behavioral payloads by an allowlist before persistence. Username digraphs are retained (non-secret). Demo passwords are scrypt-hashed in a small account store beside the database. SQLite is unencrypted locally; `node tools/research.js archive` produces AES-256-GCM snapshots and `prune` applies retention. Do not share `data/` after real people have enrolled.
+
+## Repository map
+
+| Path | Contents |
+|---|---|
+| `server/` | engine: `login.js` (passive decision and step-up), `passive.js` (passive features and matcher), `scoring.js` + `features/` + `matching/` (active matcher), `security/` (replay, automation), `explain.js`, `core.js` (SQLite, challenges), `http.js` |
+| `client/` | demo login page (`index.html`, `app.js`, `dashboard.js`) and the SDK (`sdk.js`, `bioprint.js`, `passive.js`, `behavior.js`, `ambient.js`, `stepup.js`) |
+| `examples/shop` | Verdant, a shop that mounts BioPrint |
+| `docs/` | algorithm, report, integration reference, design history |
+| `tools/` | research utilities (export, evaluate, audit, migrate, archive, prune) |
