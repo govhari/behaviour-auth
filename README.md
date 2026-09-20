@@ -4,6 +4,50 @@ Behavior-based login security. A normal username/password form is observed from 
 
 Zero dependencies. Node 24+ built-ins only (HTTP, SQLite, crypto). Decisions take single-digit milliseconds, and every one comes with a plain-English explanation.
 
+## Quick start
+
+Requirements: Node 24 or newer (`node --version`), Chrome, and a physical keyboard with a mouse or trackpad. There is nothing to install.
+
+```bash
+npm start
+```
+
+Open <http://127.0.0.1:3000>: the demo login page.
+
+```bash
+npm run example:shop
+```
+
+Open <http://localhost:3210>: Verdant, a small shop that mounts BioPrint the way a real application would.
+
+Put `HOST=0.0.0.0` in front of either command to open it to other devices on the same network, at `http://<your-lan-ip>:<port>`.
+
+Three things to know before you type:
+
+1. **Enrollment is a person typing.** Scripted or automated typing is detected and rejected by design, and pasted text carries no rhythm to learn from, so the profile has to come from someone at the keyboard. Eight ordinary logins plus six short phrase-and-targets rounds, about two minutes.
+2. **Enroll and log in on the same machine.** Key hold times are keyboard-specific; a profile trained on one laptop legitimately fails on another. A new browser install always gets the step-up check. Test the impostor case by handing the same keyboard to someone else.
+3. **Start clean.** Open **Manage users** on the demo page and click **Clear everything** so every profile is trained on the current matcher.
+
+## The demo login page
+
+**Enroll.** Type a username, choose a password (at least eight characters), click **Enroll**. The login card switches to *Enrolling* and walks through the rounds:
+
+- **Typing rounds, 8.** One ordinary login per round: type the username, type the password, move to the button, click. This is the passive profile, the one every real login is checked against.
+- **Movement rounds, 6.** Type a short phrase and click the targets. This is the step-up profile, used only when a login is uncertain.
+
+The counters are fixed. If the server finds two rounds that disagree it asks for one more, shown as *Extra typing round 1*, and the target never grows. When both profiles are saved the card flips back to *Log in* with an **ENROLLED · LOG IN NOW** badge.
+
+**Log in.** Type the username and password and press the button. The verdict panel shows ACCEPTED, STEP-UP (one ten-second active check) or BLOCKED, the identity confidence against your personal threshold, the decision latency, and one line per signal saying what was seen against what was enrolled.
+
+**Impostor test.** Hand the keyboard to a teammate. Same password, different rhythm; the mismatched signals appear in the verdict panel and the login is stepped up or blocked.
+
+**What BioPrint sees.** Under the form, a live strip shows the keystroke intervals and pointer samples as they are captured: timing and motion only, never the password itself.
+
+**Manage users** (under the account card) lists every account with its enrollment state, deletes one (account, profile and every recording together) or clears everything.
+
+URL hook for a rehearsed opening: `?auto=enroll&user=NAME`.
+
+
 ## How it works
 
 Full description: [docs/ALGORITHM.md](docs/ALGORITHM.md). Submission report: [docs/REPORT.md](docs/REPORT.md).
